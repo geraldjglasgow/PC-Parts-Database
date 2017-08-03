@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Displaying Computer Parts</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+<link rel="stylesheet" type="text/css" href="styles.css" />
 <div class="container">
 	<div class="row category-child" style="margin-top:20px">
 		<div class="col-lg-2 col-md-4 col-xs-6 thumb ">
@@ -63,3 +71,6 @@
 	</div>
 
 </div>
+
+</body>
+</html>
