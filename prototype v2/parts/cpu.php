@@ -25,6 +25,21 @@
 
 <body>
 
+  <?php
+    $s1 = $_GET['query'];
+    // querying database
+    $conn = get_connection();
+    $query = $conn->prepare("$s1");
+    $query->execute();
+    $result = $query->fetchAll(); // this will hold a 2d array of all retrieved elements
+
+    // getting prices
+    $speed = $conn->prepare("SELECT speed from cpu GROUP BY speed ORDER BY speed ASC");
+    $speed->execute();
+    $speedresult = $speed->fetchAll();
+
+   ?>
+
   <!-- container -->
   <div class="container-fluid">
 
@@ -36,6 +51,20 @@
                 <div class="list-group">
                     <a href="./cpu.php" class="list-group-item">Processors</a>
                 </div>
+                <!-- Single button -->
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Speed <span class="caret"></span>
+                  </button>
+                  <ul class="dropdown-menu">
+                    <?php
+                    $i=0;
+                    while($i<sizeof($speedresult)){
+                      echo '<li><a href="cpu.php?query=SELECT name, brand, series, speed, core, thread, socket, price FROM cpu WHERE speed ='.$speedresult[$i][0].'">'.$speedresult[$i][0].'</a></li>';
+                      $i+=1;
+                    }
+                     ?>
+                  </ul>
+
 
             </div>
           <!-- end sidebar -->
@@ -44,11 +73,6 @@
                 <div class="row">
 
                   <?php
-                  $conn = get_connection();
-                  $query = $conn->prepare("SELECT name, brand, series, speed, core, thread, socket, price FROM cpu order by price");
-                  $query->execute();
-                  $result = $query->fetchAll(); // this will hold a 2d array of all retrieved elements
-
 
                   $j=0;
                   while($j<sizeof($result)){
