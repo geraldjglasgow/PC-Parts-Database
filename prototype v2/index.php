@@ -34,7 +34,7 @@
             <div class="col-md-2">
                 <a style = "text-decoration:none" href = "./index.php"><p class="lead">PC Parts Database</p></a>
                 <div class="list-group">
-                    <a href="./parts/cpu.php" class="list-group-item">Processors</a>
+                    <a href="./parts/cpu.php?query=SELECT name, brand, series, speed, core, thread, socket, price FROM cpu" class="list-group-item">Processors</a>
                     <a href="#" class="list-group-item">Video Cards</a>
                     <a href="#" class="list-group-item">Memory</a>
                 </div>
@@ -44,7 +44,7 @@
             <div class="col-md-9">
                 <div class="row">
 
-                  
+
 
                 </div>
             </div>
