@@ -36,17 +36,20 @@
                 <div class="list-group">
                     <a href="./cpu.php" class="list-group-item">Processors</a>
                 </div>
+
             </div>
           <!-- end sidebar -->
 
-            <div class="col-md-9">
+            <div class="col-md-10">
                 <div class="row">
 
                   <?php
                   $conn = get_connection();
-                  $query = $conn->prepare("SELECT name, brand, series, speed, core, thread, socket FROM cpu");
+                  $query = $conn->prepare("SELECT name, brand, series, speed, core, thread, socket, price FROM cpu order by price");
                   $query->execute();
                   $result = $query->fetchAll(); // this will hold a 2d array of all retrieved elements
+
+
                   $j=0;
                   while($j<sizeof($result)){
                   echo '
@@ -58,9 +61,10 @@
                               <p>'.$result[$j][3].'GHz Base Clock<br />
                                 '.$result[$j][4].' Core '.$result[$j][5].' Thread<br />
                                 '.$result[$j][6].' socket<br />
+                                $'.$result[$j][7].'<br />
                               </p>
                               <p>
-                                   <a href="#" class="btn btn-default">More Info</a>
+                                   <a href="moreinfo.php?cname='.$result[$j][0].'&db=cpu" class="btn btn-default">More Info</a>
                               </p>
                           </div>
                       </div>
