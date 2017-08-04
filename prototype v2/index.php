@@ -32,9 +32,9 @@
         <div class="row">
           <!-- sidebar -->
             <div class="col-md-2">
-                <p class="lead">PC Parts Database</p>
+                <a style = "text-decoration:none" href = "./index.php"><p class="lead">PC Parts Database</p></a>
                 <div class="list-group">
-                    <a href="#" class="list-group-item">Processors</a>
+                    <a href="./parts/cpu.php" class="list-group-item">Processors</a>
                     <a href="#" class="list-group-item">Video Cards</a>
                     <a href="#" class="list-group-item">Memory</a>
                 </div>
@@ -44,33 +44,7 @@
             <div class="col-md-9">
                 <div class="row">
 
-                  <?php
-                  $conn = get_connection();
-                  $query = $conn->prepare("SELECT name, brand, series, speed, core, thread, socket FROM cpu");
-                  $query->execute();
-                  $result = $query->fetchAll(); // this will hold a 2d array of all retrieved elements
-                  $j=0;
-                  while($j<sizeof($result)){
-                  echo '
-                    <div class="col-sm-5 col-lg-3 col-md-4 text-center">
-                      <div class="thumbnail">
-                          <img src="./pics/'.$result[$j][0].'.jpg" alt="'.$result[$j][0].'">
-                          <div class="caption">
-                              <h4>'.$result[$j][1].' '.$result[$j][2].' '.$result[$j][0].'</h4>
-                              <p>'.$result[$j][3].'GHz Base Clock<br />
-                                '.$result[$j][4].' Core '.$result[$j][5].' Thread<br />
-                                '.$result[$j][6].' socket<br />
-                              </p>
-                              <p>
-                                   <a href="#" class="btn btn-default">More Info</a>
-                              </p>
-                          </div>
-                      </div>
-                    </div>';
-                    $j +=1;
-                  }
-
-                    ?>
+                  
 
                 </div>
             </div>
@@ -92,7 +66,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <p>Copyright &copy; PC Parts Database 2017</p>
                 </div>
             </div>
         </footer>
