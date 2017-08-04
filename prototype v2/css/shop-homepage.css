@@ -1,31 +1,19 @@
 
 body {
-  padding-top: 20pt;
-  padding-left: 20pt;
+  padding-top: 30pt;
+  padding-left: 30pt;
 }
 
 .caption {
-    height: 130px;
+    height: 150pt;
     overflow: hidden;
 }
 
-.caption h4 {
-    white-space: nowrap;
-}
 
 .thumbnail img {
     width: 80%;
 }
 
-.ratings {
-    padding-right: 10px;
-    padding-left: 10px;
-    color: #d17581;
-}
-
-.thumbnail {
-    padding: 0;
-}
 
 .thumbnail .caption-full {
     padding: 9px;
@@ -33,5 +21,5 @@ body {
 }
 
 footer {
-    margin: 50px 0;
+
 }
