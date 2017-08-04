@@ -49,7 +49,7 @@
             <div class="col-md-2">
                 <a style = "text-decoration:none" href = "../index.php"><p class="lead">PC Parts Database</p></a>
                 <div class="list-group">
-                    <a href="./parts/cpu.php?query=SELECT name, brand, series, speed, core, thread, socket, price FROM cpu" class="list-group-item">Processors</a>
+                    <a href="./cpu.php?query=SELECT name, brand, series, speed, core, thread, socket, price FROM cpu" class="list-group-item">Processors</a>
                 </div>
                 <!-- Single button -->
                   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
