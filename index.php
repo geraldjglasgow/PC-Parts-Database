@@ -9,13 +9,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Heroic Features - Start Bootstrap Template</title>
+    <title>PC-Parts</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="css/heroic-features.css" rel="stylesheet">
+
+    <?php include('./SQLFILES/databaseconnect.php'); ?>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -147,77 +149,54 @@
 
         </div>
         <!-- /.row -->
-
-        <hr>
-        <div class="row text-center">
-
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="pics/7700k.jpg" alt="7700k" height="500" width="800">
-                    <div class="caption">
-                        <h3>Intel Core i7 7700k</h3>
-                        <p>4.2GHz Base Clock<br />
-                          4 Core 8 Thread<br />
-                          LGA 1151 socket<br />
-                        </p>
-                        <p>
-                            <a href="#" class="btn btn-default">More Info</a>
-                        </p>
-                    </div>
-                </div>
+        <!-- Title -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>All Processors</h3>
             </div>
-
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="pics/7600k.jpg" alt="7600k" height="500" width="800">
-                    <div class="caption">
-                        <h3>Intel Core i5 7600k</h3>
-                        <p>3.8GHz Base Clock<br />
-                          4 Core 4 Thread<br />
-                          LGA 1151 socket<br />
-                        </p>
-                        <p>
-                             <a href="#" class="btn btn-default">More Info</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="pics/7100.jpg" alt="7100" height="500" width="800">
-                    <div class="caption">
-                        <h3>Intel Core i3 7100</h3>
-                        <p>3.9GHz Base Clock<br />
-                          2 Core 4 Thread<br />
-                          LGA 1151 socket<br />
-                        </p>
-                        <p>
-                             <a href="#" class="btn btn-default">More Info</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="pics/G4620.jpg" alt="G4620" height="500" width="800">
-                    <div class="caption">
-                        <h3>Intel Pentium G4620</h3>
-                        <p>3.7GHz Base Clock<br />
-                          2 Core 4 Thread<br />
-                          LGA 1151 socket<br />
-                        </p>
-                        <p>
-                             <a href="#" class="btn btn-default">More Info</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-
         </div>
+        <!-- /.row -->
+
+        <!--BEGIN DISPLAY ALL CPU's LOOP -->
+        <hr>
+
+        <?php
+          $conn = get_connection();
+          $query = $conn->prepare("SELECT name, brand, series, speed, core, thread, socket FROM cpu");
+          $query->execute();
+          $result = $query->fetchAll(); // this will hold a 2d array of all retrieved elements
+          $j=0;
+          while($j<sizeof($result)){        // for creating a new row before displaying 4 cpu's
+            echo '<div class="row text-center">';
+            for($i=$j;$i<$j+4;$i++){       // this displays 4 cpu's at a time.
+              if(isset($result[$i][0])){   // if still in loop and index is out of bounds
+                echo '
+                <div class="col-md-3 col-sm-6 hero-feature">
+                    <div class="thumbnail">
+                        <img src="./pics/'.$result[$i][0].'.jpg" alt="'.$result[$i][0].'" height="500" width="800">
+                        <div class="caption">
+                            <h3>'.$result[$i][1].' '.$result[$i][2].' '.$result[$i][0].'</h3>
+                            <p>'.$result[$i][3].'GHz Base Clock<br />
+                              '.$result[$i][4].' Core '.$result[$i][5].' Thread<br />
+                              '.$result[$i][6].' socket<br />
+                            </p>
+                            <p>
+                                 <a href="#" class="btn btn-default">More Info</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>';
+              }
+            } // end for
+            $j+=4;
+            echo '</div>';
+          } // end while
+
+          $conn = null;
+          ?>
 
         <hr>
+        <!-- END LOOPS -->
 
         <!-- Footer -->
         <footer>
