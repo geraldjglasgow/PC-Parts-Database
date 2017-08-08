@@ -12,10 +12,10 @@
     <title>PC Parts Database</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../css/shop-homepage.css" rel="stylesheet">
+    <link href="../../css/shop-homepage.css" rel="stylesheet">
     <style>
       table, th, td {
         border: 1px solid black;
@@ -32,7 +32,7 @@
     </style>
 
     <!-- Database Connection -->
-    <?php include('../SQLFILES/databaseconnect.php'); ?>
+    <?php include('../../SQLFILES/databaseconnect.php'); ?>
 
 
 </head>
@@ -46,7 +46,7 @@
         <div class="row">
           <!-- sidebar -->
             <div class="col-md-2">
-                <a style = "text-decoration:none" href = "../index.php"><p class="lead">PC Parts Database</p></a>
+                <a style = "text-decoration:none" href = "../../index.php"><p class="lead">PC Parts Database</p></a>
                 <div class="list-group">
                     <a href="./cpu.php?query=SELECT name, brand, series, speed, core, thread, socket, price FROM cpu" class="list-group-item">Processors</a>
                 </div>
@@ -69,7 +69,7 @@
                   echo '
                     <div class="col-sm-12 col-lg-12 col-md-12 text-center">
                       <div class="thumbnail">
-                          <img style="width:180px; height:135px;" src="../pics/'.$result[0][0].'.jpg" alt="'.$result[0][0].'">
+                          <img style="width:180px; height:135px;" src="../../pictures/cpu/'.$result[0][0].'.jpg" alt="'.$result[0][0].'">
                           <div class="caption">
                               <h4>'.$result[0][1].' '.$result[0][2].' '.$result[0][0].'</h4>
                               <p>'.$result[0][3].' GHz Base Clock<br />
@@ -174,10 +174,10 @@
     <!-- /.container -->
 
     <!-- jQuery -->
-    <script src="../js/jquery.js"></script>
+    <script src="../../js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
 
 </body>
 </html>

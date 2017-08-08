@@ -12,13 +12,13 @@
     <title>PC Parts Database</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../css/shop-homepage.css" rel="stylesheet">
+    <link href="../../css/shop-homepage.css" rel="stylesheet">
 
     <!-- Database Connection -->
-    <?php include('../SQLFILES/databaseconnect.php'); ?>
+    <?php include('../../SQLFILES/databaseconnect.php'); ?>
 
 
 </head>
@@ -47,11 +47,12 @@
         <div class="row">
           <!-- sidebar -->
             <div class="col-md-2">
-                <a style = "text-decoration:none" href = "../index.php"><p class="lead">PC Parts Database</p></a>
+                <a style = "text-decoration:none" href = "../../index.php"><p class="lead">PC Parts Database</p></a>
                 <div class="list-group">
                     <a href="./cpu.php?query=SELECT name, brand, series, speed, core, thread, socket, price FROM cpu" class="list-group-item">Processors</a>
                 </div>
-                <!-- Single button -->
+                <div class="list-group">
+                <!-- Speed button -->
                   <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     Speed <span class="caret"></span>
                   </button>
@@ -64,7 +65,11 @@
                     }
                      ?>
                   </ul>
-
+              </div>
+                <!-- Price button -->
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Price <span class="caret"></span>
+                  </button>
 
             </div>
           <!-- end sidebar -->
@@ -79,7 +84,7 @@
                   echo '
                     <div class="col-sm-5 col-lg-3 col-md-4 text-center">
                       <div class="thumbnail">
-                          <img src="../pics/'.$result[$j][0].'.jpg" alt="'.$result[$j][0].'">
+                          <img src="../../pictures/cpu/'.$result[$j][0].'.jpg" alt="'.$result[$j][0].'">
                           <div class="caption">
                               <h4>'.$result[$j][1].' '.$result[$j][2].' '.$result[$j][0].'</h4>
                               <p>'.$result[$j][3].'GHz Base Clock<br />
@@ -88,7 +93,7 @@
                                 $'.$result[$j][7].'<br />
                               </p>
                               <p>
-                                   <a href="moreinfo.php?cname='.$result[$j][0].'&db=cpu" class="btn btn-default">More Info</a>
+                                   <a href="./moreinfo.php?cname='.$result[$j][0].'&db=cpu" class="btn btn-default">More Info</a>
                               </p>
                           </div>
                       </div>
@@ -127,10 +132,10 @@
     <!-- /.container -->
 
     <!-- jQuery -->
-    <script src="../js/jquery.js"></script>
+    <script src="../../js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="../../js/bootstrap.min.js"></script>
 
 </body>
 </html>
