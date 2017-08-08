@@ -31,7 +31,14 @@ insert int videoCard (name, brand, coreClock, gpu, price) values
   ('1080tiG','GIGABYTE',1544,'GeForce GTX 1080 Ti',719.99),
   ('1080tiM','MSI',1506,'GeForce GTX 1080 Ti',729.99),
   ('1080tiP','PNY',1582,'GeForce GTX 1080 Ti',739.99),
-  ('1080tiZ','ZOTAC',1569,'GeForce GTX 1080 Ti',759.99);
+  ('1080tiZ','ZOTAC',1569,'GeForce GTX 1080 Ti',759.99),
+  ('1080A','ASUS',1695,'GeForce GTX 1080',578.99),
+  ('1080E','EVGA',1708,'GeForce GTX 1080',549.99),
+  ('1080G','GIGABYTE',1721,'GeForce GTX 1080',549.99),
+  ('1080M','MSI',1771,'GeForce GTX 1080',579.99),
+  ('1080M','PNY',1708,'GeForce GTX 1080',569.99),
+  ('1080Z','ZOTAC',1620,'GeForce GTX 1080',539.99),
+  
 
 create table gpu (
   gpu varchar(30),
@@ -44,6 +51,7 @@ create table gpu (
 insert into gpu (gpu, memory, memoryType, memoryInterface)
 values
   ('GeForce GTX 1080 Ti',11,'GDDR5X',352),
+  ('GeForce GTX 1080',8,GDDR5X,256),
 
 CREATE TABLE cpu (
 	name VARCHAR(30),
