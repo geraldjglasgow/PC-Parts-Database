@@ -12,8 +12,8 @@ insert into makers (brand, type, directLink) values
   ('PNY','gpu','https://www.pny.com/')
   ('EVGA','gpu','https://www.evga.com/'),
   ('MSI','gpu','https://us.msi.com/'),
-  ('ZOTAC','gpu','https://www.zotac.com/'),
-  ();
+  ('ZOTAC','gpu','https://www.zotac.com/');
+
 create table videoCard (
   name varchar(30),
   brand varchar(30),
@@ -43,7 +43,7 @@ insert int videoCard (name, brand, coreClock, gpu, price) values
   ('1060G','GIGABYTE',1620,'GeForce GTX 1060',244.99),
   ('1060M','MSI',1544,'GeForce GTX 1060',229.99),
   ('1060P','PNY',1506,'GeForce GTX 1060',229.99),
-  ('1060Z','ZOTAC',1506,'GeForce GTX 1060',249.99),
+  ('1060Z','ZOTAC',1506,'GeForce GTX 1060',249.99);
 
 create table gpu (
   gpu varchar(30),
@@ -57,7 +57,7 @@ insert into gpu (gpu, memory, memoryType, memoryInterface)
 values
   ('GeForce GTX 1080 Ti',11,'GDDR5X',352),
   ('GeForce GTX 1080',8,GDDR5X,256),
-  ('GeForce GTX 1060',3,'GDDR5X',192)
+  ('GeForce GTX 1060',3,'GDDR5X',192);
 
 CREATE TABLE cpu (
 	name VARCHAR(30),
