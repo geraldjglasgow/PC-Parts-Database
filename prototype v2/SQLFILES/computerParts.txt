@@ -19,18 +19,19 @@ create table videoCard (
   brand varchar(30),
   coreClock int,
   gpu varchar(30),
+  price double(10,2)
   foreign key (brand) reference makers (brand),
   foreign key (gpu) reference gpu (gpu),
   primary key (name)
 );
 
-insert int videoCard (name, brand, coreClock, gpu) values
-  ('1080tiA','ASUS',1480,'GeForce GTX 1080 Ti'),
-  ('1080tiE','EVGA',1556,'GeForce GTX 1080 Ti'),
-  ('1080tiG','GIGABYTE',1544,'GeForce GTX 1080 Ti'),
-  ('1080tiM','MSI',1506,'GeForce GTX 1080 Ti'),
-  ('1080tiP','PNY',1582,'GeForce GTX 1080 Ti'),
-  ('1080tiZ','ZOTAC',1569,'GeForce GTX 1080 Ti');
+insert int videoCard (name, brand, coreClock, gpu, price) values
+  ('1080tiA','ASUS',1480,'GeForce GTX 1080 Ti',739.77),
+  ('1080tiE','EVGA',1556,'GeForce GTX 1080 Ti',749.99),
+  ('1080tiG','GIGABYTE',1544,'GeForce GTX 1080 Ti',719.99),
+  ('1080tiM','MSI',1506,'GeForce GTX 1080 Ti',729.99),
+  ('1080tiP','PNY',1582,'GeForce GTX 1080 Ti',739.99),
+  ('1080tiZ','ZOTAC',1569,'GeForce GTX 1080 Ti',759.99);
 
 create table gpu (
   gpu varchar(30),
