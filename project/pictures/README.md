@@ -1,1 +1,1 @@
-pictures for the database
+pictures for the database.
