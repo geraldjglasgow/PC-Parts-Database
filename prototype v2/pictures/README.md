@@ -1,1 +1,0 @@
-pictures for the database
