@@ -48,7 +48,7 @@
             <div class="col-md-2">
                 <a style = "text-decoration:none" href = "../../index.php"><p class="lead">PC Parts Database</p></a>
                 <div class="list-group">
-                    <a href="./cpu.php?query=SELECT name, brand, series, speed, core, thread, socket, price FROM cpu" class="list-group-item">Processors</a>
+                    <a href="./cpu.php" class="list-group-item">Processors</a>
                 </div>
             </div>
           <!-- end sidebar -->
@@ -58,9 +58,8 @@
 
                   <?php
                   $cname = $_GET['cname'];
-                  $db = $_GET['db'];
                   $conn = get_connection();
-                  $query = $conn->prepare("SELECT name, brand, series, speed, core, thread, socket, gen, l3, tdp, price, turbo, l2 FROM $db WHERE name = '$cname'");
+                  $query = $conn->prepare("SELECT name, brand, series, speed, core, thread, socket, gen, l3, tdp, price, turbo, l2 FROM cpu WHERE name = '.$cname.'");
                   $query->execute();
                   $result = $query->fetchAll(); // this will hold a 2d array of all retrieved elements
 
