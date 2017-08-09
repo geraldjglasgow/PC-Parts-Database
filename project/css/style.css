@@ -1,0 +1,45 @@
+
+body {
+  padding-top: 30pt;
+  padding-left: 30pt;
+}
+
+.caption {
+    height: 150pt;
+    overflow: hidden;
+}
+
+.thumbnail{
+  background-color:white;
+  margin-top:10px;
+  border: 2px solid #141d28;
+  height:250pt;
+  border-radius:5px;
+}
+
+.caption a {
+  text-decoration: none;
+  background-color:white;
+  border: 1px solid #c2c3c4;
+  border-radius:2px;
+  padding: 4px 4px 4px 4px;
+}
+
+.caption p {
+  margin:0;
+  padding:3px 0px 0px 0px;
+}
+
+.thumbnail img {
+    width: 75%;
+}
+
+.thumbnail .caption-full {
+    padding: 9px;
+    color: #333;
+}
+
+footer {
+    color: blue;
+    margin-bottom:50px;
+}
