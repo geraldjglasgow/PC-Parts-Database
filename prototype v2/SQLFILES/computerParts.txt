@@ -12,7 +12,37 @@ insert into makers (brand, type, directLink) values
   ('PNY','gpu','https://www.pny.com/')
   ('EVGA','gpu','https://www.evga.com/'),
   ('MSI','gpu','https://us.msi.com/'),
-  ('ZOTAC','gpu','https://www.zotac.com/');
+  ('ZOTAC','gpu','https://www.zotac.com/'),
+  ('G.SKILL','ram','https://www.gskill.com/en/')
+  ('CORSAIR','ram','http://www.corsair.com/en-us'),
+  ('TEAM','ram','http://www.teamgroupinc.com/en/index.php');
+
+create table ram (
+  name varchar(30),
+  brand varchar(30),
+  capacity int,
+  type varchar(15),
+  speed int,
+  timing varchar(15),
+  casLatency int,
+  price double(10,2),
+  primary key (name),
+  foreign key (brand) references makers (brand)
+);
+
+insert into ram (name, brand, capacity, type, speed, timing, casLatency, price)
+values
+  ('4266venCOR','CORSAIR',16,'288-Pin DDR4',4266,'19-26-26-46',329.99),
+  ('4266triG.S','G.SKILL',16,'288-Pin DDR4',4266,'19-19-19-39',251.99),
+  ('4200venCOR','CORSAIR',8,'288-Pin DDR4',4200,'19-26-26-46',199.99),
+  ('4200triG.S','G.SKILL',8,'288-Pin DDR4',4200,'19-26-26-46',384.99),
+  ('4133venCOR','CORSAIR',32,'288-Pin DDR4',4133,'19-25-25-45',489.99),
+  ('4133triG.S','G.SKILL',16,'288-Pin DDR4',4133,'19-19-19-39',240.99),
+  ('4000domCOR','CORSAIR',8,'288-Pin DDR4',4000,'19-23-23-45',159.99),
+  ('4000venCOR','CORSAIR',64,'288-Pin DDR4',4000,'19-23-23-45',799.99),
+  ('4000ripG.S','G.SKILL',8,'288-Pin DDR4',4000,'19-21-21-41',115.99),
+  ('4000triG.S','G.SKILL',16,'288-Pin DDR4',4000,'19-21-21-41',212.99),
+  ('4000t-fTEA','TEAM',16,'288-Pin DDR4',4000,'18-20-20-44',228.99);
 
 create table videoCard (
   name varchar(30),
