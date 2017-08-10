@@ -29,6 +29,9 @@ insert into makers (brand, type, directLink) values
     energyEfficiency varchar(20)
   );
 
+  insert into powerSupply (name, brand, maxPower, fans, energyEfficiency) values
+    ()
+
   create table motherboard (
     name varchar(30),
     brand varchar(30),
