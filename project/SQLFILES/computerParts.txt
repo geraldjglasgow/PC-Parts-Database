@@ -1,3 +1,4 @@
+
 create table makers (
   brand varchar(30),
   type varchar(15),
@@ -17,6 +18,28 @@ insert into makers (brand, type, directLink) values
   ('CORSAIR','ram','http://www.corsair.com/en-us'),
   ('TEAM','ram','http://www.teamgroupinc.com/en/index.php');
 
+  create table powerSupply (
+    name varchar(30),
+    brand varchar(30),
+    maxPower int,
+    fans int,
+    energyEfficiency varchar(20)
+  );
+
+  create table motherBoard (
+    name varchar(30),
+    brand varchar(30),
+    socket varchar(12),
+    chipset varchar(15),
+    memorySlots int,
+    memoryStandard varchar(10),
+    usbSlots int,
+    PCI int,
+    primary key (name),
+    foreign key (brand) reference makers (brand),
+    foreign key (socket) reference cpu (socket)
+  );
+
 create table ram (
   name varchar(30),
   brand varchar(30),
@@ -32,6 +55,7 @@ create table ram (
 
 insert into ram (name, brand, capacity, type, speed, timing, casLatency, price)
 values
+  ('4333venCOR','CORSAIR',16,'288-Pin DDR4',4333,'19-26-26-46',19,319.99),
   ('4266venCOR','CORSAIR',16,'288-Pin DDR4',4266,'19-26-26-46',329.99),
   ('4266triG.S','G.SKILL',16,'288-Pin DDR4',4266,'19-19-19-39',251.99),
   ('4200venCOR','CORSAIR',8,'288-Pin DDR4',4200,'19-26-26-46',199.99),
@@ -43,6 +67,16 @@ values
   ('4000ripG.S','G.SKILL',8,'288-Pin DDR4',4000,'19-21-21-41',115.99),
   ('4000triG.S','G.SKILL',16,'288-Pin DDR4',4000,'19-21-21-41',212.99),
   ('4000t-fTEA','TEAM',16,'288-Pin DDR4',4000,'18-20-20-44',228.99);
+  ('3866domCOR','CORSAIR',32,'288-Pin DDR4',3866,'18-22-22-40',18,499.99),
+  ('3866venCOR','CORSAIR',32,'288-Pin DDR4',3866,'18-22-22-40',18,386.99),
+  ('3866ripG.S','G.SKILL',8,'288-Pin DDR4',3866,'18-22-22-42',18,109.99),
+  ('3866triG.S','G.SKILL',32,'288-Pin DDR4',3866,'18-19-19-39',18,483.99),
+  ('3866t-fTEA','TEAM',16,'288-Pin DDR4',3866,'18-20-20-44',19,207.99),
+  ('2400domCOR','CORSAIR',8,'240-Pin DDR3',2400,'11-13-13-31',11,89.99),
+  ('2400venCOR','CORSAIR',8,'240-Pin DDR3',2400,'11-13-13-31',11,69.99),
+  ('2400areG.S','G.SKILL',8,'240-Pin DDR3',2400,'11-13-13-31',11,64.99),
+  ('2400ripG.S','G.SKILL',8,'240-Pin DDR3',2400,'11-13-13-31',11,64.99),
+  ('','',,'',,'',,),
 
 create table videoCard (
   name varchar(30),
