@@ -15,21 +15,25 @@
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../../css/shop-homepage.css" rel="stylesheet">
-    <style>
-      table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-      }
-      th, td {
-        padding: 5px;
-        text-align: left;
-      }
-      .caption {
-          height: auto;
-          overflow: hidden;
-      }
-    </style>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  height: 10px;
+}
+
+th, td {
+  padding: 5px;
+  text-align: left;
+}
+.thumbnail {
+  height:auto;
+}
+</style>
 
     <!-- Database Connection -->
     <?php include('../../SQLFILES/databaseconnect.php'); ?>
@@ -59,12 +63,10 @@
                   <?php
                   $cname = $_GET['cname'];
                   $conn = get_connection();
-                  $query = $conn->prepare("SELECT name, brand, series, speed, core, thread, socket, gen, l3, tdp, price, turbo, l2 FROM cpu WHERE name = '.$cname.'");
+                  $query = $conn->prepare("SELECT name, brand, series, speed, core, thread, socket, gen, l3, tdp, price, turbo, l2 FROM cpu WHERE name = $cname");
                   $query->execute();
                   $result = $query->fetchAll(); // this will hold a 2d array of all retrieved elements
 
-
-                  $percore = number_format($result[0][10] / $result[0][4], 2, '.', '');
                   echo '
                     <div class="col-sm-12 col-lg-12 col-md-12 text-center">
                       <div class="thumbnail">
@@ -74,6 +76,7 @@
                               <p>'.$result[0][3].' GHz Base Clock<br />
                                 '.$result[0][4].' Core '.$result[0][5].' Thread<br />
                                 '.$result[0][6].' socket<br />
+                                $'.$result[0][10].'<br />
                               </p>
                               <p>
                             </div>
@@ -133,10 +136,6 @@
                                     <th>TDP</th>
                                     <td>'.$result[0][9].' Watts</td>
                                   </tr>
-                                  <tr>
-                                    <th>Price per Core</th>
-                                    <td>$'.$percore.'</td>
-                                  </tr>
                                 </table>
                               </p>
                             </div>
@@ -146,12 +145,6 @@
 
                 </div>
             </div>
-
-
-
-
-
-
         </div>
     </div>
     <!-- /.container -->

@@ -6,16 +6,16 @@ CREATE TABLE cpu (
 	core INT,
 	thread INT,
 	speed DECIMAL(2,1),
-	l3 DOUBLE,
+	lthree DOUBLE,
 	tdp INT,
 	price DECIMAL(6,2),
 	series VARCHAR(12),
 	turbo DECIMAL(2,1),
-	l2 DOUBLE,
+	ltwo DOUBLE,
 	PRIMARY KEY(name)
 );
 
-INSERT INTO cpu (name, brand, gen, socket, core, thread, speed, l3, tdp, price, series, turbo, l2)
+INSERT INTO cpu (name, brand, gen, socket, core, thread, speed, lthree, tdp, price, series, turbo, ltwo)
 VALUES
 ('7900X','Intel','SkyLakeX','LGA 2066',10,20,3.3,13.75,140,1059.99,'i9',4.3,10),
 ('7820X','Intel','SkyLakeX','LGA 2066',8,16,3.6,11,140,599.99,'i7',4.3,8),
