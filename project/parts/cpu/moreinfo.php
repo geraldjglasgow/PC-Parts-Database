@@ -15,21 +15,25 @@
     <link href="../../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="../../css/shop-homepage.css" rel="stylesheet">
-    <style>
-      table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-      }
-      th, td {
-        padding: 5px;
-        text-align: left;
-      }
-      .caption {
-          height: auto;
-          overflow: hidden;
-      }
-    </style>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  height: 10px;
+}
+
+th, td {
+  padding: 5px;
+  text-align: left;
+}
+.thumbnail {
+  height:auto;
+}
+</style>
 
     <!-- Database Connection -->
     <?php include('../../SQLFILES/databaseconnect.php'); ?>
@@ -72,6 +76,7 @@
                               <p>'.$result[0][3].' GHz Base Clock<br />
                                 '.$result[0][4].' Core '.$result[0][5].' Thread<br />
                                 '.$result[0][6].' socket<br />
+                                $'.$result[0][10].'<br />
                               </p>
                               <p>
                             </div>
@@ -140,12 +145,6 @@
 
                 </div>
             </div>
-
-
-
-
-
-
         </div>
     </div>
     <!-- /.container -->
