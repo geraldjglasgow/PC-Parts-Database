@@ -26,8 +26,8 @@ body {
 }
 
 .caption p {
-  margin:0;
-  padding:3px 0px 0px 0px;
+  margin:0px 0px 0px 0px;
+  padding:0px 0px 25px 0px;
 }
 
 .thumbnail img {
@@ -40,6 +40,6 @@ body {
 }
 
 footer {
-    color: blue;
+    color: #141d28;
     margin-bottom:50px;
 }
