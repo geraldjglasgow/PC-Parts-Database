@@ -79,7 +79,7 @@
         Speed</a>
       </h4>
     </div>
-    <div id="collapse1" class="panel-collapse collapse in">
+    <div id="collapse1" class="panel-collapse collapse">
       <div class="panel-body">
         <form action="/PC-Parts-Database/project/parts/cpu/cpu.php" method="get">
           <input type="checkbox" name="s1" value="2.7" <?php echo $form['2.7'] ? 'checked' : '' ?> /> 2.7<br>
@@ -110,14 +110,11 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse2" style = "text-decoration:none;">
-        Collapsible Group 2</a>
+        Cores</a>
       </h4>
     </div>
     <div id="collapse2" class="panel-collapse collapse">
-      <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.</div>
+      <div class="panel-body">stuffstuffstuffstuffstuffstuffs</div>
     </div>
   </div>
   <!-- ########################################################################################### -->
@@ -125,14 +122,11 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse3" style = "text-decoration:none;">
-        Collapsible Group 3</a>
+        Threads</a>
       </h4>
     </div>
     <div id="collapse3" class="panel-collapse collapse">
-      <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-      commodo consequat.</div>
+      <div class="panel-body">stuffstuffsuffstuffstuff</div>
     </div>
   </div>
 </div>
@@ -144,6 +138,7 @@
         <div class="row">
           <?php
           $j=0;
+
           while($j<sizeof($result)){
             echo '
             <div class="col-sm-5 col-lg-3 col-md-4 text-center">

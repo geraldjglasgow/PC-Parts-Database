@@ -59,12 +59,10 @@
                   <?php
                   $cname = $_GET['cname'];
                   $conn = get_connection();
-                  $query = $conn->prepare("SELECT name, brand, series, speed, core, thread, socket, gen, l3, tdp, price, turbo, l2 FROM cpu WHERE name = '.$cname.'");
+                  $query = $conn->prepare("SELECT name, brand, series, speed, core, thread, socket, gen, l3, tdp, price, turbo, l2 FROM cpu WHERE name = $cname");
                   $query->execute();
                   $result = $query->fetchAll(); // this will hold a 2d array of all retrieved elements
 
-
-                  $percore = number_format($result[0][10] / $result[0][4], 2, '.', '');
                   echo '
                     <div class="col-sm-12 col-lg-12 col-md-12 text-center">
                       <div class="thumbnail">
@@ -132,10 +130,6 @@
                                   <tr>
                                     <th>TDP</th>
                                     <td>'.$result[0][9].' Watts</td>
-                                  </tr>
-                                  <tr>
-                                    <th>Price per Core</th>
-                                    <td>$'.$percore.'</td>
                                   </tr>
                                 </table>
                               </p>
