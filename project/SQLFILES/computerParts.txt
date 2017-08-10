@@ -9,6 +9,8 @@ insert into makers (brand, type, directLink) values
   ('intel','cpu','https://www.intel.com/content/www/us/en/homepage.html'),
   ('AMD','cpu','http://www.amd.com/en/home'),
   ('AMD','gpu','http://www.amd.com/en/home'),
+  ('ASROCK','motherboard','http://www.asrock.com/index.asp'),
+  ('BIOSTAR','motherboard','http://www.biostar-usa.com/app/en-us/'),
   ('GIGABYTE','gpu','http://www.gigabyte.us/'),
   ('ASUS','gpu','https://www.asus.com/us/'),
   ('PNY','gpu','https://www.pny.com/')
@@ -27,19 +29,42 @@ insert into makers (brand, type, directLink) values
     energyEfficiency varchar(20)
   );
 
-  create table motherBoard (
+  create table motherboard (
     name varchar(30),
     brand varchar(30),
     socket varchar(12),
     chipset varchar(15),
-    memorySlots int,
+    memoryCap int,
     memoryStandard varchar(10),
-    usbSlots int,
+    usbPorts int,
     PCI int,
+    price double(10,2)
     primary key (name),
     foreign key (brand) reference makers (brand),
     foreign key (socket) reference cpu (socket)
   );
+
+insert into motherboard (name, brand, socket, chipset, memoryCap,
+memoryStandard, usbPorts, PCI3, price) values
+  ('am4B','BIOSTAR','AM4','AMD X370',32,'DDR4',7,1,109.99),
+  ('am4AR','ASROCK','AM4','AMD Promontory B350',64,'DDR4',7,1,74.99),
+  ('am4A','ASUS','AM4','AMD B350',64,'DDR4',8,1,89,99),
+  ('am4G','GIGABYTE','AM4','AMD B350',64,'DDR4',7,1,109.99),
+  ('am4M','MSI','AM4','AMD B350',64,'DDR4',6,1,101.99),
+  ('lga1151A','ASUS','LGA1151','Intel Z270',64,'DDR4',8,3,629.99),
+  ('lga1151M','MSI','LGA1151','Intel Z170',64,'DDR4',7,3,546.99),
+  ('lga1151G','GIGABYTE','LGA1151','Intel Z270',64,'DDR4',9,2,499.99),
+  ('lga1151AS','ASROCK','LGA1151','Intel Z170',64,'DDR4',12,3,169.99),
+  ('lga1151B','BIOSTAR','LGA1151','Intel Z270',64,'DDR4',9,3,154.99),
+  ('lga2066A','ASUS','LGA2066','Intel X299',128,'DDR4',13,9,339.99),
+  ('lga2066AS','ASROCK','LGA2066','Intel X299',128,'DDR4',11,4,389.99),
+  ('lga2066G','GIGABYTE','LGA2066','Intel X299',128,'DDR4',12,5,249.99),
+  ('lga2066M','MSI','LGA2066','Intel X299',128,'DDR4',13,4,399.99),
+  ('lga2011-v3A','ASUS','LGA2011-v3','Intel X99',128,'DDR4',12,7,239.99),
+  ('lga2011-v3AS','ASROCK','LGA2011-v3','Intel X99',128,'DDR4',13,5,329.99),
+  ('lga2011-v3E','EVGA','LGA2011-v3','Intel X99',128,'DDR4',14,5,219.99),
+  ('lga2011-v3G','GIGABYTE','LGA2011-v3','Intel X99',128,'DDR4',10,4,219.99),
+  ('lga2011-v3M','MSI','lGA2011-v3','Intel X99',128,'DDR4',15,4,329.99);
 
 create table ram (
   name varchar(30),
@@ -220,14 +245,14 @@ VALUES
 ('G3900','Intel','SkyLake','LGA 1151',2,2,2.8,2,65,34.99, 'Celeron',null,0.5),
 ('G3920','Intel','SkyLake','LGA 1151',2,2,2.9,2,65,44.99, 'Celeron',null,0.5),
 
-('1950X','AMD','SummitRidge','AMD4',16,32,3.4,32,180,999.99, 'ThreadRipper',4.0,8),
-('1920X','AMD','SummitRidge','AMD4',12,24,3.5,32,180,799.99, 'ThreadRipper',4.0,6),
-('1800X','AMD','SummitRidge','AMD4',8,16,4.0,16,95,459.99, 'Ryzen 7',4.0,4),
-('1700X','AMD','SummitRidge','AMD4',8,16,3.4,16,95,329.99, 'Ryzen 7',3.8,4),
-('1700','AMD','SummitRidge','AMD4',8,16,3.0,16,65,299.99, 'Ryzen 7',3.7,4),
-('1600X','AMD','SummitRidge','AMD4',6,12,3.6,16,95,229.99, 'Ryzen 5',4.0,3),
-('1600','AMD','SummitRidge','AMD4',6,12,3.2,16,65,214.99, 'Ryzen 5',3.6,3),
-('1500X','AMD','SummitRidge','AMD4',4,8,3.5,16,65,189.99, 'Ryzen 5',3.7,2),
-('1400','AMD','SummitRidge','AMD4',4,8,3.2,8,65,164.99, 'Ryzen 5',3.4,2),
-('1300X','AMD','SummitRidge','AMD4',4,4,3.5,8,65,129.99, 'Ryzen 3',3.7,2),
-('1200','AMD','SummitRidge','AMD4',4,4,3.1,8,65,109.99, 'Ryzen 3',3.4,2);
+('1950X','AMD','SummitRidge','AM4',16,32,3.4,32,180,999.99, 'ThreadRipper',4.0,8),
+('1920X','AMD','SummitRidge','AM4',12,24,3.5,32,180,799.99, 'ThreadRipper',4.0,6),
+('1800X','AMD','SummitRidge','AM4',8,16,4.0,16,95,459.99, 'Ryzen 7',4.0,4),
+('1700X','AMD','SummitRidge','AM4',8,16,3.4,16,95,329.99, 'Ryzen 7',3.8,4),
+('1700','AMD','SummitRidge','AM4',8,16,3.0,16,65,299.99, 'Ryzen 7',3.7,4),
+('1600X','AMD','SummitRidge','AM4',6,12,3.6,16,95,229.99, 'Ryzen 5',4.0,3),
+('1600','AMD','SummitRidge','AM4',6,12,3.2,16,65,214.99, 'Ryzen 5',3.6,3),
+('1500X','AMD','SummitRidge','AM4',4,8,3.5,16,65,189.99, 'Ryzen 5',3.7,2),
+('1400','AMD','SummitRidge','AM4',4,8,3.2,8,65,164.99, 'Ryzen 5',3.4,2),
+('1300X','AMD','SummitRidge','AM4',4,4,3.5,8,65,129.99, 'Ryzen 3',3.7,2),
+('1200','AMD','SummitRidge','AM4',4,4,3.1,8,65,109.99, 'Ryzen 3',3.4,2);
