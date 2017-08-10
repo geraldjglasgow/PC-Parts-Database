@@ -3,11 +3,14 @@ create table makers (
   brand varchar(30),
   type varchar(15),
   directLink varchar(60),
-  primary key (brand)
+  primary key (brand, type)
 );
 insert into makers (brand, type, directLink) values
   ('intel','cpu','https://www.intel.com/content/www/us/en/homepage.html'),
   ('AMD','cpu','http://www.amd.com/en/home'),
+  ('AMD','gpu','http://www.amd.com/en/home'),
+  ('ASROCK','motherboard','http://www.asrock.com/index.asp'),
+  ('BIOSTAR','motherboard','http://www.biostar-usa.com/app/en-us/'),
   ('GIGABYTE','gpu','http://www.gigabyte.us/'),
   ('ASUS','gpu','https://www.asus.com/us/'),
   ('PNY','gpu','https://www.pny.com/')
@@ -26,19 +29,42 @@ insert into makers (brand, type, directLink) values
     energyEfficiency varchar(20)
   );
 
-  create table motherBoard (
+  create table motherboard (
     name varchar(30),
     brand varchar(30),
     socket varchar(12),
     chipset varchar(15),
-    memorySlots int,
+    memoryCap int,
     memoryStandard varchar(10),
-    usbSlots int,
+    usbPorts int,
     PCI int,
+    price double(10,2)
     primary key (name),
     foreign key (brand) reference makers (brand),
     foreign key (socket) reference cpu (socket)
   );
+
+insert into motherboard (name, brand, socket, chipset, memoryCap,
+memoryStandard, usbPorts, PCI3, price) values
+  ('am4B','BIOSTAR','AM4','AMD X370',32,'DDR4',7,1,109.99),
+  ('am4AR','ASROCK','AM4','AMD Promontory B350',64,'DDR4',7,1,74.99),
+  ('am4A','ASUS','AM4','AMD B350',64,'DDR4',8,1,89,99),
+  ('am4G','GIGABYTE','AM4','AMD B350',64,'DDR4',7,1,109.99),
+  ('am4M','MSI','AM4','AMD B350',64,'DDR4',6,1,101.99),
+  ('lga1151A','ASUS','LGA1151','Intel Z270',64,'DDR4',8,3,629.99),
+  ('lga1151M','MSI','LGA1151','Intel Z170',64,'DDR4',7,3,546.99),
+  ('lga1151G','GIGABYTE','LGA1151','Intel Z270',64,'DDR4',9,2,499.99),
+  ('lga1151AS','ASROCK','LGA1151','Intel Z170',64,'DDR4',12,3,169.99),
+  ('lga1151B','BIOSTAR','LGA1151','Intel Z270',64,'DDR4',9,3,154.99),
+  ('lga2066A','ASUS','LGA2066','Intel X299',128,'DDR4',13,9,339.99),
+  ('lga2066AS','ASROCK','LGA2066','Intel X299',128,'DDR4',11,4,389.99),
+  ('lga2066G','GIGABYTE','LGA2066','Intel X299',128,'DDR4',12,5,249.99),
+  ('lga2066M','MSI','LGA2066','Intel X299',128,'DDR4',13,4,399.99),
+  ('lga2011-v3A','ASUS','LGA2011-v3','Intel X99',128,'DDR4',12,7,239.99),
+  ('lga2011-v3AS','ASROCK','LGA2011-v3','Intel X99',128,'DDR4',13,5,329.99),
+  ('lga2011-v3E','EVGA','LGA2011-v3','Intel X99',128,'DDR4',14,5,219.99),
+  ('lga2011-v3G','GIGABYTE','LGA2011-v3','Intel X99',128,'DDR4',10,4,219.99),
+  ('lga2011-v3M','MSI','lGA2011-v3','Intel X99',128,'DDR4',15,4,329.99);
 
 create table ram (
   name varchar(30),
@@ -53,30 +79,53 @@ create table ram (
   foreign key (brand) references makers (brand)
 );
 
-insert into ram (name, brand, capacity, type, speed, timing, casLatency, price)
+insert into ram (name, brand, capacity, speed, timing, casLatency, price)
 values
-  ('4333venCOR','CORSAIR',16,'288-Pin DDR4',4333,'19-26-26-46',19,319.99),
-  ('4266venCOR','CORSAIR',16,'288-Pin DDR4',4266,'19-26-26-46',329.99),
-  ('4266triG.S','G.SKILL',16,'288-Pin DDR4',4266,'19-19-19-39',251.99),
-  ('4200venCOR','CORSAIR',8,'288-Pin DDR4',4200,'19-26-26-46',199.99),
-  ('4200triG.S','G.SKILL',8,'288-Pin DDR4',4200,'19-26-26-46',384.99),
-  ('4133venCOR','CORSAIR',32,'288-Pin DDR4',4133,'19-25-25-45',489.99),
-  ('4133triG.S','G.SKILL',16,'288-Pin DDR4',4133,'19-19-19-39',240.99),
-  ('4000domCOR','CORSAIR',8,'288-Pin DDR4',4000,'19-23-23-45',159.99),
-  ('4000venCOR','CORSAIR',64,'288-Pin DDR4',4000,'19-23-23-45',799.99),
-  ('4000ripG.S','G.SKILL',8,'288-Pin DDR4',4000,'19-21-21-41',115.99),
-  ('4000triG.S','G.SKILL',16,'288-Pin DDR4',4000,'19-21-21-41',212.99),
-  ('4000t-fTEA','TEAM',16,'288-Pin DDR4',4000,'18-20-20-44',228.99);
-  ('3866domCOR','CORSAIR',32,'288-Pin DDR4',3866,'18-22-22-40',18,499.99),
-  ('3866venCOR','CORSAIR',32,'288-Pin DDR4',3866,'18-22-22-40',18,386.99),
-  ('3866ripG.S','G.SKILL',8,'288-Pin DDR4',3866,'18-22-22-42',18,109.99),
-  ('3866triG.S','G.SKILL',32,'288-Pin DDR4',3866,'18-19-19-39',18,483.99),
-  ('3866t-fTEA','TEAM',16,'288-Pin DDR4',3866,'18-20-20-44',19,207.99),
-  ('2400domCOR','CORSAIR',8,'240-Pin DDR3',2400,'11-13-13-31',11,89.99),
-  ('2400venCOR','CORSAIR',8,'240-Pin DDR3',2400,'11-13-13-31',11,69.99),
-  ('2400areG.S','G.SKILL',8,'240-Pin DDR3',2400,'11-13-13-31',11,64.99),
-  ('2400ripG.S','G.SKILL',8,'240-Pin DDR3',2400,'11-13-13-31',11,64.99),
-  ('','',,'',,'',,),
+  ('4333venCOR','CORSAIR',16,4333,'19-26-26-46',19,319.99),
+  ('4266venCOR','CORSAIR',16,4266,'19-26-26-46',329.99),
+  ('4266triG.S','G.SKILL',16,4266,'19-19-19-39',251.99),
+  ('4200venCOR','CORSAIR',8,4200,'19-26-26-46',199.99),
+  ('4200triG.S','G.SKILL',8,4200,'19-26-26-46',384.99),
+  ('4133venCOR','CORSAIR',32,4133,'19-25-25-45',489.99),
+  ('4133triG.S','G.SKILL',16,4133,'19-19-19-39',240.99),
+  ('4000domCOR','CORSAIR',8,4000,'19-23-23-45',159.99),
+  ('4000venCOR','CORSAIR',64,4000,'19-23-23-45',799.99),
+  ('4000ripG.S','G.SKILL',8,4000,'19-21-21-41',115.99),
+  ('4000triG.S','G.SKILL',16,4000,'19-21-21-41',212.99),
+  ('4000t-fTEA','TEAM',16,4000,'18-20-20-44',228.99);
+  ('3866domCOR','CORSAIR',32,3866,'18-22-22-40',18,499.99),
+  ('3866venCOR','CORSAIR',32,3866,'18-22-22-40',18,386.99),
+  ('3866ripG.S','G.SKILL',8,3866,'18-22-22-42',18,109.99),
+  ('3866triG.S','G.SKILL',32,3866,'18-19-19-39',18,483.99),
+  ('3866t-fTEA','TEAM',16,3866,'18-20-20-44',19,207.99),
+  ('2400domCOR','CORSAIR',8,2400,'11-13-13-31',11,89.99),
+  ('2400venCOR','CORSAIR',8,2400,'11-13-13-31',11,69.99),
+  ('2400areG.S','G.SKILL',8,2400,'11-13-13-31',11,64.99),
+  ('2400ripG.S','G.SKILL',8,2400,'11-13-13-31',11,64.99),
+  ('2400sniG.S','G.SKILL',8,2400,'11-13-13-31',11,65.99),
+  ('2400triG.S','G.SKILL',8,2400,'10-12-12-31',10,85.99),
+  ('2400darTEA','TEAM',16,2400,'11-13-13-35',11,104.99),
+  ('2133venCOR','CORSAIR',8,2133,'11-12-12-27',11,69.99),
+  ('2133areG.S','G.SKILL',8,2133,'11-11-11',11,63.99),
+  ('2133ripG.S','G.SKILL',8,2133,'10-12-12-31',10,64.99),
+  ('2133sniG.S','G.SKILL',8,2133,'10-12-12-31',10,65.99),
+  ('2133triG.S','G.SKILL',16,2133,'9-11-11-31',9,122.99);
+
+create table ramSpeed (
+  speed int,
+  type varchar(15),
+  primary key (speed),
+  foreign key (speed) reference ram (speed)
+);
+
+insert into ramSpeed (speed, tpye) values
+  (4333,'288-Pin DDR4'),
+  (4266,'288-Pin DDR4'),
+  (4133,'288-Pin DDR4'),
+  (4000,'288-Pin DDR4'),
+  (3866,'288-Pin DDR4'),
+  (2400,'240-Pin DDR3'),
+  (2133,'240-Pin DDR3');
 
 create table videoCard (
   name varchar(30),
@@ -107,7 +156,16 @@ insert int videoCard (name, brand, coreClock, gpu, price) values
   ('1060G','GIGABYTE',1620,'GeForce GTX 1060',244.99),
   ('1060M','MSI',1544,'GeForce GTX 1060',229.99),
   ('1060P','PNY',1506,'GeForce GTX 1060',229.99),
-  ('1060Z','ZOTAC',1506,'GeForce GTX 1060',249.99);
+  ('1060Z','ZOTAC',1506,'GeForce GTX 1060',249.99),
+  ('1050A','ASUS',1404,'GeForce GTX 1050',129.99),
+  ('1050E','EVGA',1354,'GeForce GTX 1050',114.99),
+  ('1050G','GIGABYTE',1379,'GeForce GTX 1050',119.99),
+  ('1050M','MSI',1354,'GeForce GTX 1050',119.99),
+  ('1050P','PNY',1354,'GeForce GTX 1050',119.99),
+  ('1050Z','ZOTAC',1354,'GeForce GTX 1050',109.99),
+  ('vegaA','AMD',1382,'Radeon Vega Frontier Edition',999.99),
+  ('vegalcA','AMD',1382,'Radeon Vega Frontier Edition',1499.99)
+
 
 create table gpu (
   gpu varchar(30),
@@ -121,7 +179,9 @@ insert into gpu (gpu, memory, memoryType, memoryInterface)
 values
   ('GeForce GTX 1080 Ti',11,'GDDR5X',352),
   ('GeForce GTX 1080',8,GDDR5X,256),
-  ('GeForce GTX 1060',3,'GDDR5X',192);
+  ('GeForce GTX 1060',3,'GDDR5X',192),
+  ('GeForce GTX 1050',2,'GDDR5',128),
+  ('Radeon Vega Frontier Edition',16,'HBM2',2048)
 
 CREATE TABLE cpu (
 	name VARCHAR(30),
@@ -185,14 +245,14 @@ VALUES
 ('G3900','Intel','SkyLake','LGA 1151',2,2,2.8,2,65,34.99, 'Celeron',null,0.5),
 ('G3920','Intel','SkyLake','LGA 1151',2,2,2.9,2,65,44.99, 'Celeron',null,0.5),
 
-('1950X','AMD','SummitRidge','AMD4',16,32,3.4,32,180,999.99, 'ThreadRipper',4.0,8),
-('1920X','AMD','SummitRidge','AMD4',12,24,3.5,32,180,799.99, 'ThreadRipper',4.0,6),
-('1800X','AMD','SummitRidge','AMD4',8,16,4.0,16,95,459.99, 'Ryzen 7',4.0,4),
-('1700X','AMD','SummitRidge','AMD4',8,16,3.4,16,95,329.99, 'Ryzen 7',3.8,4),
-('1700','AMD','SummitRidge','AMD4',8,16,3.0,16,65,299.99, 'Ryzen 7',3.7,4),
-('1600X','AMD','SummitRidge','AMD4',6,12,3.6,16,95,229.99, 'Ryzen 5',4.0,3),
-('1600','AMD','SummitRidge','AMD4',6,12,3.2,16,65,214.99, 'Ryzen 5',3.6,3),
-('1500X','AMD','SummitRidge','AMD4',4,8,3.5,16,65,189.99, 'Ryzen 5',3.7,2),
-('1400','AMD','SummitRidge','AMD4',4,8,3.2,8,65,164.99, 'Ryzen 5',3.4,2),
-('1300X','AMD','SummitRidge','AMD4',4,4,3.5,8,65,129.99, 'Ryzen 3',3.7,2),
-('1200','AMD','SummitRidge','AMD4',4,4,3.1,8,65,109.99, 'Ryzen 3',3.4,2);
+('1950X','AMD','SummitRidge','AM4',16,32,3.4,32,180,999.99, 'ThreadRipper',4.0,8),
+('1920X','AMD','SummitRidge','AM4',12,24,3.5,32,180,799.99, 'ThreadRipper',4.0,6),
+('1800X','AMD','SummitRidge','AM4',8,16,4.0,16,95,459.99, 'Ryzen 7',4.0,4),
+('1700X','AMD','SummitRidge','AM4',8,16,3.4,16,95,329.99, 'Ryzen 7',3.8,4),
+('1700','AMD','SummitRidge','AM4',8,16,3.0,16,65,299.99, 'Ryzen 7',3.7,4),
+('1600X','AMD','SummitRidge','AM4',6,12,3.6,16,95,229.99, 'Ryzen 5',4.0,3),
+('1600','AMD','SummitRidge','AM4',6,12,3.2,16,65,214.99, 'Ryzen 5',3.6,3),
+('1500X','AMD','SummitRidge','AM4',4,8,3.5,16,65,189.99, 'Ryzen 5',3.7,2),
+('1400','AMD','SummitRidge','AM4',4,8,3.2,8,65,164.99, 'Ryzen 5',3.4,2),
+('1300X','AMD','SummitRidge','AM4',4,4,3.5,8,65,129.99, 'Ryzen 3',3.7,2),
+('1200','AMD','SummitRidge','AM4',4,4,3.1,8,65,109.99, 'Ryzen 3',3.4,2);
