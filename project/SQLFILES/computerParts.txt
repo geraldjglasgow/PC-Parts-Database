@@ -14,11 +14,11 @@ insert into makers (brand, type, directLink) values
   ('BIOSTAR','motherboard','http://www.biostar-usa.com/app/en-us/'),
   ('GIGABYTE','gpu','http://www.gigabyte.us/'),
   ('ASUS','gpu','https://www.asus.com/us/'),
-  ('PNY','gpu','https://www.pny.com/')
+  ('PNY','gpu','https://www.pny.com/'),
   ('EVGA','gpu','https://www.evga.com/'),
   ('MSI','gpu','https://us.msi.com/'),
   ('ZOTAC','gpu','https://www.zotac.com/'),
-  ('G.SKILL','ram','https://www.gskill.com/en/')
+  ('G.SKILL','ram','https://www.gskill.com/en/'),
   ('CORSAIR','ram','http://www.corsair.com/en-us'),
   ('TEAM','ram','http://www.teamgroupinc.com/en/index.php'),
   ('SILVERSTONE','power supply','http://www.silverstonetek.com/'),
@@ -132,7 +132,7 @@ values
   ('4000venCOR','CORSAIR',64,4000,'19-23-23-45',19,799.99),
   ('4000ripG.S','G.SKILL',8,4000,'19-21-21-41',19,115.99),
   ('4000triG.S','G.SKILL',16,4000,'19-21-21-41',19,212.99),
-  ('4000t-fTEA','TEAM',16,4000,'18-20-20-44',18,228.99);
+  ('4000t-fTEA','TEAM',16,4000,'18-20-20-44',18,228.99),
   ('3866domCOR','CORSAIR',32,3866,'18-22-22-40',18,499.99),
   ('3866venCOR','CORSAIR',32,3866,'18-22-22-40',18,386.99),
   ('3866ripG.S','G.SKILL',8,3866,'18-22-22-42',18,109.99),
