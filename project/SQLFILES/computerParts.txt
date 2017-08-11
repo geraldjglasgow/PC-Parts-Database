@@ -74,7 +74,7 @@ insert into powerSupply (name, brand, maxPower, fans, energyEfficiency, weight, 
     name varchar(30),
     brand varchar(30),
     socket varchar(12),
-    chipset varchar(15),
+    chipset varchar(25),
     memoryCap int,
     memoryStandard varchar(10),
     usbPorts int,
@@ -88,7 +88,7 @@ insert into motherboard (name, brand, socket, chipset, memoryCap,
 memoryStandard, usbPorts, PCIthree, price) values
   ('am4B','BIOSTAR','AM4','AMD X370',32,'DDR4',7,1,109.99),
   ('am4AR','ASROCK','AM4','AMD Promontory B350',64,'DDR4',7,1,74.99),
-  ('am4A','ASUS','AM4','AMD B350',64,'DDR4',8,1,89,99),
+  ('am4A','ASUS','AM4','AMD B350',64,'DDR4',8,1,89.99),
   ('am4G','GIGABYTE','AM4','AMD B350',64,'DDR4',7,1,109.99),
   ('am4M','MSI','AM4','AMD B350',64,'DDR4',6,1,101.99),
   ('lga1151A','ASUS','LGA1151','Intel Z270',64,'DDR4',8,3,629.99),
@@ -122,17 +122,17 @@ create table ram (
 insert into ram (name, brand, capacity, speed, timing, casLatency, price)
 values
   ('4333venCOR','CORSAIR',16,4333,'19-26-26-46',19,319.99),
-  ('4266venCOR','CORSAIR',16,4266,'19-26-26-46',329.99),
-  ('4266triG.S','G.SKILL',16,4266,'19-19-19-39',251.99),
-  ('4200venCOR','CORSAIR',8,4200,'19-26-26-46',199.99),
-  ('4200triG.S','G.SKILL',8,4200,'19-26-26-46',384.99),
-  ('4133venCOR','CORSAIR',32,4133,'19-25-25-45',489.99),
-  ('4133triG.S','G.SKILL',16,4133,'19-19-19-39',240.99),
-  ('4000domCOR','CORSAIR',8,4000,'19-23-23-45',159.99),
-  ('4000venCOR','CORSAIR',64,4000,'19-23-23-45',799.99),
-  ('4000ripG.S','G.SKILL',8,4000,'19-21-21-41',115.99),
-  ('4000triG.S','G.SKILL',16,4000,'19-21-21-41',212.99),
-  ('4000t-fTEA','TEAM',16,4000,'18-20-20-44',228.99);
+  ('4266venCOR','CORSAIR',16,4266,'19-26-26-46',19,329.99),
+  ('4266triG.S','G.SKILL',16,4266,'19-19-19-39',19,251.99),
+  ('4200venCOR','CORSAIR',8,4200,'19-26-26-46',19,199.99),
+  ('4200triG.S','G.SKILL',8,4200,'19-26-26-46',19,384.99),
+  ('4133venCOR','CORSAIR',32,4133,'19-25-25-45',19,489.99),
+  ('4133triG.S','G.SKILL',16,4133,'19-19-19-39',19,240.99),
+  ('4000domCOR','CORSAIR',8,4000,'19-23-23-45',19,159.99),
+  ('4000venCOR','CORSAIR',64,4000,'19-23-23-45',19,799.99),
+  ('4000ripG.S','G.SKILL',8,4000,'19-21-21-41',19,115.99),
+  ('4000triG.S','G.SKILL',16,4000,'19-21-21-41',19,212.99),
+  ('4000t-fTEA','TEAM',16,4000,'18-20-20-44',18,228.99);
   ('3866domCOR','CORSAIR',32,3866,'18-22-22-40',18,499.99),
   ('3866venCOR','CORSAIR',32,3866,'18-22-22-40',18,386.99),
   ('3866ripG.S','G.SKILL',8,3866,'18-22-22-42',18,109.99),
@@ -154,8 +154,7 @@ values
 create table ramSpeed (
   speed int,
   type varchar(15),
-  primary key (speed),
-  foreign key (speed) references ram (speed)
+  primary key (speed)
 );
 
 insert into ramSpeed (speed, tpye) values
@@ -166,17 +165,6 @@ insert into ramSpeed (speed, tpye) values
   (3866,'288-Pin DDR4'),
   (2400,'240-Pin DDR3'),
   (2133,'240-Pin DDR3');
-
-create table videoCard (
-  name varchar(30),
-  brand varchar(30),
-  coreClock int,
-  gpu varchar(30),
-  price double(10,2)
-  foreign key (brand) references makers (brand),
-  foreign key (gpu) references gpu (gpu),
-  primary key (name)
-);
 
 create table gpu (
   gpu varchar(30),
@@ -189,10 +177,21 @@ create table gpu (
 insert into gpu (gpu, memory, memoryType, memoryInterface)
 values
   ('GeForce GTX 1080 Ti',11,'GDDR5X',352),
-  ('GeForce GTX 1080',8,GDDR5X,256),
+  ('GeForce GTX 1080',8,'GDDR5X',256),
   ('GeForce GTX 1060',3,'GDDR5X',192),
   ('GeForce GTX 1050',2,'GDDR5',128),
   ('Radeon Vega Frontier Edition',16,'HBM2',2048);
+
+create table videoCard (
+  name varchar(30),
+  brand varchar(30),
+  coreClock int,
+  gpu varchar(30),
+  price double(10,2)
+  foreign key (brand) references makers (brand),
+  foreign key (gpu) references gpu (gpu),
+  primary key (name)
+);
 
 insert int videoCard (name, brand, coreClock, gpu, price) values
   ('1080tiA','ASUS',1480,'GeForce GTX 1080 Ti',739.77),
@@ -242,56 +241,56 @@ CREATE TABLE cpu (
 
 INSERT INTO cpu (name, brand, gen, socket, core, thread, speed, lthree, tdp, price, series, turbo, ltwo)
 VALUES
-('7900X','Intel','SkyLakeX','LGA 2066',10,20,3.3,13.75,140,1059.99,'i9',4.3,10),
-('7820X','Intel','SkyLakeX','LGA 2066',8,16,3.6,11,140,599.99,'i7',4.3,8),
-('7800X','Intel','SkyLakeX','LGA 2066',6,12,3.5,8.25,140,529.99,'i7',4.0,6),
-('7740X','Intel','KabyLakeX','LGA 2066',4,8,4.3,8,112,349.99,'i7', 4.5,4),
-('7700K','Intel','KabyLake','LGA 1151',4,8,4.2,8,91,339.99,'i7', 4.5, 1),
-('7700','Intel','KabyLake','LGA 1151',4,8,3.6,8,65,309.99,'i7',4.2,1),
-('6700K','Intel','SkyLake','LGA 1151',4,8,4.0,8,91,329.99,'i7',4.2,1),
-('6700','Intel','SkyLake','LGA 1151',4,8,3.4,8,65,304.99,'i7',4.0, 1),
-('6950X','Intel','Broadwell-E','LGA 2011-v3',10,20,3.0,25,140,1730.37,'i7',3.5,2.56),
-('6900K','Intel','Broadwell-E','LGA 2011-v3',8,16,3.2,20,140,1049.99,'i7',3.7,2),
-('6850K','Intel','Broadwell-E','LGA 2011-v3',6,12,3.6,15,140,389.99,'i7',3.8,1.5),
-('6800K','Intel','Broadwell-E','LGA 2011-v3',6,12,3.4,15,140,349.99,'i7',3.6,1.5),
+  ('7900X','Intel','SkyLakeX','LGA 2066',10,20,3.3,13.75,140,1059.99,'i9',4.3,10),
+  ('7820X','Intel','SkyLakeX','LGA 2066',8,16,3.6,11,140,599.99,'i7',4.3,8),
+  ('7800X','Intel','SkyLakeX','LGA 2066',6,12,3.5,8.25,140,529.99,'i7',4.0,6),
+  ('7740X','Intel','KabyLakeX','LGA 2066',4,8,4.3,8,112,349.99,'i7', 4.5,4),
+  ('7700K','Intel','KabyLake','LGA 1151',4,8,4.2,8,91,339.99,'i7', 4.5, 1),
+  ('7700','Intel','KabyLake','LGA 1151',4,8,3.6,8,65,309.99,'i7',4.2,1),
+  ('6700K','Intel','SkyLake','LGA 1151',4,8,4.0,8,91,329.99,'i7',4.2,1),
+  ('6700','Intel','SkyLake','LGA 1151',4,8,3.4,8,65,304.99,'i7',4.0, 1),
+  ('6950X','Intel','Broadwell-E','LGA 2011-v3',10,20,3.0,25,140,1730.37,'i7',3.5,2.56),
+  ('6900K','Intel','Broadwell-E','LGA 2011-v3',8,16,3.2,20,140,1049.99,'i7',3.7,2),
+  ('6850K','Intel','Broadwell-E','LGA 2011-v3',6,12,3.6,15,140,389.99,'i7',3.8,1.5),
+  ('6800K','Intel','Broadwell-E','LGA 2011-v3',6,12,3.4,15,140,349.99,'i7',3.6,1.5),
 
-('7640X','Intel','KabyLakeX','LGA 2066',4,4,4.0,6,112,249.99,'i5',4.2,4),
-('7600K','Intel','KabyLake','LGA 1151',4,4,3.8,6,91,239.99,'i5',4.2,1),
-('7600','Intel','KabyLake','LGA 1151',4,4,3.5,6,65,229.99,'i5',4.1,1),
-('7500','Intel','KabyLake','LGA 1151',4,4,3.4,6,65,209.99,'i5',3.8,1),
-('7400','Intel','KabyLake','LGA 1151',4,4,3.0,6,65,189.99,'i5',3.5,1),
-('6600K','Intel','SkyLake','LGA 1151',4,4,3.5,6,91,234.99,'i5',3.9,1),
-('6600','Intel','SkyLake','LGA 1151',4,4,3.3,6,65,219.99,'i5',3.9,1),
-('6500','Intel','SkyLake','LGA 1151',4,4,3.2,6,65,204.99,'i5',3.6,1),
-('6400','Intel','SkyLake','LGA 1151',4,4,2.7,6,65,184.99,'i5',3.3,1),
+  ('7640X','Intel','KabyLakeX','LGA 2066',4,4,4.0,6,112,249.99,'i5',4.2,4),
+  ('7600K','Intel','KabyLake','LGA 1151',4,4,3.8,6,91,239.99,'i5',4.2,1),
+  ('7600','Intel','KabyLake','LGA 1151',4,4,3.5,6,65,229.99,'i5',4.1,1),
+  ('7500','Intel','KabyLake','LGA 1151',4,4,3.4,6,65,209.99,'i5',3.8,1),
+  ('7400','Intel','KabyLake','LGA 1151',4,4,3.0,6,65,189.99,'i5',3.5,1),
+  ('6600K','Intel','SkyLake','LGA 1151',4,4,3.5,6,91,234.99,'i5',3.9,1),
+  ('6600','Intel','SkyLake','LGA 1151',4,4,3.3,6,65,219.99,'i5',3.9,1),
+  ('6500','Intel','SkyLake','LGA 1151',4,4,3.2,6,65,204.99,'i5',3.6,1),
+  ('6400','Intel','SkyLake','LGA 1151',4,4,2.7,6,65,184.99,'i5',3.3,1),
 
-('7100','Intel','KabyLake','LGA 1151',2,4,3.9,3,51,129.99,'i3',null,0.5),
-('7300','Intel','KabyLake','LGA 1151',2,4,4.0,4,51,149.99,'i3',null,0.5),
-('7320','Intel','KabyLake','LGA 1151',2,4,4.1,4,51,159.99,'i3',null,0.5),
-('7350K','Intel','KabyLake','LGA 1151',2,4,4.2,4,60,169.99,'i3',null,0.5),
-('6100','Intel','SkyLake','LGA 1151',2,4,3.7,3,51,119.99,'i3',null,0.5),
-('6300','Intel','SkyLake','LGA 1151',2,4,3.8,4,65,134.99,'i3',null,0.5),
-('6320','Intel','SkyLake','LGA 1151',2,4,3.9,4,65,154.99,'i3',null,0.5),
+  ('7100','Intel','KabyLake','LGA 1151',2,4,3.9,3,51,129.99,'i3',null,0.5),
+  ('7300','Intel','KabyLake','LGA 1151',2,4,4.0,4,51,149.99,'i3',null,0.5),
+  ('7320','Intel','KabyLake','LGA 1151',2,4,4.1,4,51,159.99,'i3',null,0.5),
+  ('7350K','Intel','KabyLake','LGA 1151',2,4,4.2,4,60,169.99,'i3',null,0.5),
+  ('6100','Intel','SkyLake','LGA 1151',2,4,3.7,3,51,119.99,'i3',null,0.5),
+  ('6300','Intel','SkyLake','LGA 1151',2,4,3.8,4,65,134.99,'i3',null,0.5),
+  ('6320','Intel','SkyLake','LGA 1151',2,4,3.9,4,65,154.99,'i3',null,0.5),
 
-('G4560','Intel','KabyLake','LGA 1151',2,4,3.5,3,54,59.99,'Pentium',null,0.5),
-('G4600','Intel','KabyLake','LGA 1151',2,4,3.6,3,51,69.99,'Pentium',null,0.5),
-('G4620','Intel','KabyLake','LGA 1151',2,4,3.7,3,51,79.99,'Pentium',null,0.5),
-('G4400','Intel','SkyLake','LGA 1151',2,2,3.3,3,54,54.99,'Pentium',null,0.5),
-('G4500','Intel','SkyLake','LGA 1151',2,2,3.5,3,65,64.99,'Pentium',null,0.5),
-('G4520','Intel','SkyLake','LGA 1151',2,2,3.6,3,65,74.99,'Pentium',null,0.5),
-('G3930','Intel','KabyLake','LGA 1151',2,2,2.9,2,51,39.99, 'Celeron',null,0.5),
-('G3950','Intel','KabyLake','LGA 1151',2,2,3.0,2,51,49.99, 'Celeron',null,0.5),
-('G3900','Intel','SkyLake','LGA 1151',2,2,2.8,2,65,34.99, 'Celeron',null,0.5),
-('G3920','Intel','SkyLake','LGA 1151',2,2,2.9,2,65,44.99, 'Celeron',null,0.5),
+  ('G4560','Intel','KabyLake','LGA 1151',2,4,3.5,3,54,59.99,'Pentium',null,0.5),
+  ('G4600','Intel','KabyLake','LGA 1151',2,4,3.6,3,51,69.99,'Pentium',null,0.5),
+  ('G4620','Intel','KabyLake','LGA 1151',2,4,3.7,3,51,79.99,'Pentium',null,0.5),
+  ('G4400','Intel','SkyLake','LGA 1151',2,2,3.3,3,54,54.99,'Pentium',null,0.5),
+  ('G4500','Intel','SkyLake','LGA 1151',2,2,3.5,3,65,64.99,'Pentium',null,0.5),
+  ('G4520','Intel','SkyLake','LGA 1151',2,2,3.6,3,65,74.99,'Pentium',null,0.5),
+  ('G3930','Intel','KabyLake','LGA 1151',2,2,2.9,2,51,39.99, 'Celeron',null,0.5),
+  ('G3950','Intel','KabyLake','LGA 1151',2,2,3.0,2,51,49.99, 'Celeron',null,0.5),
+  ('G3900','Intel','SkyLake','LGA 1151',2,2,2.8,2,65,34.99, 'Celeron',null,0.5),
+  ('G3920','Intel','SkyLake','LGA 1151',2,2,2.9,2,65,44.99, 'Celeron',null,0.5),
 
-('1950X','AMD','SummitRidge','AM4',16,32,3.4,32,180,999.99, 'ThreadRipper',4.0,8),
-('1920X','AMD','SummitRidge','AM4',12,24,3.5,32,180,799.99, 'ThreadRipper',4.0,6),
-('1800X','AMD','SummitRidge','AM4',8,16,4.0,16,95,459.99, 'Ryzen 7',4.0,4),
-('1700X','AMD','SummitRidge','AM4',8,16,3.4,16,95,329.99, 'Ryzen 7',3.8,4),
-('1700','AMD','SummitRidge','AM4',8,16,3.0,16,65,299.99, 'Ryzen 7',3.7,4),
-('1600X','AMD','SummitRidge','AM4',6,12,3.6,16,95,229.99, 'Ryzen 5',4.0,3),
-('1600','AMD','SummitRidge','AM4',6,12,3.2,16,65,214.99, 'Ryzen 5',3.6,3),
-('1500X','AMD','SummitRidge','AM4',4,8,3.5,16,65,189.99, 'Ryzen 5',3.7,2),
-('1400','AMD','SummitRidge','AM4',4,8,3.2,8,65,164.99, 'Ryzen 5',3.4,2),
-('1300X','AMD','SummitRidge','AM4',4,4,3.5,8,65,129.99, 'Ryzen 3',3.7,2),
-('1200','AMD','SummitRidge','AM4',4,4,3.1,8,65,109.99, 'Ryzen 3',3.4,2);
+  ('1950X','AMD','SummitRidge','AM4',16,32,3.4,32,180,999.99, 'ThreadRipper',4.0,8),
+  ('1920X','AMD','SummitRidge','AM4',12,24,3.5,32,180,799.99, 'ThreadRipper',4.0,6),
+  ('1800X','AMD','SummitRidge','AM4',8,16,4.0,16,95,459.99, 'Ryzen 7',4.0,4),
+  ('1700X','AMD','SummitRidge','AM4',8,16,3.4,16,95,329.99, 'Ryzen 7',3.8,4),
+  ('1700','AMD','SummitRidge','AM4',8,16,3.0,16,65,299.99, 'Ryzen 7',3.7,4),
+  ('1600X','AMD','SummitRidge','AM4',6,12,3.6,16,95,229.99, 'Ryzen 5',4.0,3),
+  ('1600','AMD','SummitRidge','AM4',6,12,3.2,16,65,214.99, 'Ryzen 5',3.6,3),
+  ('1500X','AMD','SummitRidge','AM4',4,8,3.5,16,65,189.99, 'Ryzen 5',3.7,2),
+  ('1400','AMD','SummitRidge','AM4',4,8,3.2,8,65,164.99, 'Ryzen 5',3.4,2),
+  ('1300X','AMD','SummitRidge','AM4',4,4,3.5,8,65,129.99, 'Ryzen 3',3.7,2),
+  ('1200','AMD','SummitRidge','AM4',4,4,3.1,8,65,109.99, 'Ryzen 3',3.4,2);
