@@ -12,125 +12,115 @@
     <title>PC Parts Database</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../../css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/style.css">
 
-    <!-- Custom CSS -->
-    <link href="../../css/shop-homepage.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
     <!-- Database Connection -->
-    <?php include('../../SQLFILES/databaseconnect.php'); ?>
-
+    <?php include('../../SQLFILES/databaseconnect.php');
+      $conn = get_connection();?>
 
 </head>
 
 <body>
 
-  <?php
-    //$s1 = $_GET['query'];
-    // querying database
-    $conn = get_connection();
-    $query = $conn->prepare("$s1");
-    $query->execute();
-    $result = $query->fetchAll(); // this will hold a 2d array of all retrieved elements
 
-    // getting prices
-    $speed = $conn->prepare("SELECT speed from cpu GROUP BY speed ORDER BY speed ASC");
-    $speed->execute();
-    $speedresult = $speed->fetchAll();
-
-   ?>
 
   <!-- container -->
   <div class="container-fluid">
-
     <!-- Page Content -->
-        <div class="row">
-          <!-- sidebar -->
-            <div class="col-md-2">
-                <a style = "text-decoration:none" href = "../index.php"><p class="lead">PC Parts Database</p></a>
-                <div class="list-group">
-                    <a href="./cpu.php?query=SELECT name, brand, series, speed, core, thread, socket, price FROM cpu" class="list-group-item">Processors</a>
-                </div>
-                <!-- Single button -->
-                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                    Speed <span class="caret"></span>
-                  </button>
-                  <ul class="dropdown-menu">
-                    <?php
-                    $i=0;
-                    while($i<sizeof($speedresult)){
-                      echo '<li><a href="cpu.php?query=SELECT name, brand, series, speed, core, thread, socket, price FROM cpu WHERE speed ='.$speedresult[$i][0].'">'.$speedresult[$i][0].'</a></li>';
-                      $i+=1;
-                    }
-                     ?>
-                  </ul>
-
-
-            </div>
-          <!-- end sidebar -->
-
-            <div class="col-md-10">
-                <div class="row">
-
-                  <?php
-
-                  $j=0;
-                  while($j<sizeof($result)){
-                  echo '
-                    <div class="col-sm-5 col-lg-3 col-md-4 text-center">
-                      <div class="thumbnail">
-                          <img src="../pics/'.$result[$j][0].'.jpg" alt="'.$result[$j][0].'">
-                          <div class="caption">
-                              <h4>'.$result[$j][1].' '.$result[$j][2].' '.$result[$j][0].'</h4>
-                              <p>'.$result[$j][3].'GHz Base Clock<br />
-                                '.$result[$j][4].' Core '.$result[$j][5].' Thread<br />
-                                '.$result[$j][6].' socket<br />
-                                $'.$result[$j][7].'<br />
-                              </p>
-                              <p>
-                                   <a href="moreinfo.php?cname='.$result[$j][0].'&db=cpu" class="btn btn-default">More Info</a>
-                              </p>
-                          </div>
-                      </div>
-                    </div>';
-                    $j +=1;
-                  }
-
-                    ?>
-
-                </div>
-            </div>
-
-
-
-
-
-
+    <div class="row">
+      <!-- sidebar -->
+      <div class="col-md-2">
+        <a href = "/PC-Parts-Database/project/index.php" style = "text-decoration:none"><p class="lead">PC Parts Database</p></a>
+        <div class="list-group">
+          <a href="gpu.php" class="list-group-item">Video Cards</a>
         </div>
-    </div>
-    <!-- /.container -->
 
-    <div class="container">
+        <?php include('./sidebar.php'); ?>
 
-        <hr>
 
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; PC Parts Database 2017</p>
-                </div>
+      </div>  <!-- end sidebar -->
+
+      <?php
+        // querying database
+        if ( $_SERVER['REQUEST_METHOD'] == 'GET' ) {
+          $i=0;
+          parse_str($_SERVER["QUERY_STRING"], $get_array);
+          $table = rtrim(key($get_array), '1234567890 ');
+          $get_array = array_values($get_array);
+          if($table == ""){
+            $q = "SELECT gpu, brand, coreClock, price, name,memory FROM gpumem NATURAL JOIN videoCard";
+            $query = $conn->prepare($q);
+          } else{
+          $q = "SELECT gpu, brand, coreClock, price, name, memory FROM gpumem NATURAL JOIN videoCard WHERE ";
+          while($i < sizeof($get_array)){
+            $q .= "$table = '";
+            $q .= $get_array[$i];
+            $q .= "'";
+            if($i != sizeof($get_array)-1){
+              $q .= " OR ";
+            }
+            $i+=1;
+          }
+          $q .= " ORDER BY ";
+          $q .= $table;
+          $query = $conn->prepare($q);
+          }
+        }
+        $query->execute();
+        $result = $query->fetchAll(); // this will hold a 2d array of all retrieved elements
+       ?>
+
+      <div class="col-md-10">
+        <div class="row">
+          <?php
+          $j=0;
+
+          while($j<sizeof($result)){
+            echo '
+            <div class="col-sm-5 col-lg-3 col-md-4 text-center">
+            <div class="thumbnail">
+            <img src="../../pictures/gpu/'.$result[$j][4].'.jpg" alt="'.$result[$j][4].'">
+            <div class="caption">
+            <h4>'.$result[$j][1].' '.$result[$j][0].'</h4>
+            <p">$'.$result[$j][3].'<br />
+            '.$result[$j][2].' MHz Core Clock<br />
+            '.$result[$j][5].'GB Video Memory<br />
+            </p>
+            <a href="./moreinfo.php?cname='.$result[$j][4].'">More Info</a>
             </div>
-        </footer>
-
+            </div>
+            </div>
+            ';
+            $j +=1;
+          }
+          ?>
+        </div>
+      </div>
     </div>
-    <!-- /.container -->
+  <!-- Container -->
+  </div>
 
-    <!-- jQuery -->
-    <script src="../js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="../js/bootstrap.min.js"></script>
+  <!-- Footer -->
+  <div class="container">
+    <hr>
+    <!-- Footer -->
+    <footer>
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Copyright &copy; PC Parts Database 2017</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <!-- Bootstrap Core JavaScript -->
+  <script type="text/javascript" src="../project/js/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="../project/js/bootstrap.min.js"></script>
 
 </body>
 </html>
