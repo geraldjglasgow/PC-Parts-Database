@@ -33,7 +33,8 @@ create table powerSupply (
   energyEfficiency varchar(20),
   weight double(4,2),
   price double(10,2),
-  primary key (name)
+  primary key (name),
+  foreign key (brand) references makers (brand)
 );
 
 insert into powerSupply (name, brand, maxPower, fans, energyEfficiency, weight, price) values
@@ -43,7 +44,7 @@ insert into powerSupply (name, brand, maxPower, fans, energyEfficiency, weight, 
   ('1500S','SILVERSTONE',1500,1,'80 plus gold',7.05,337.34),
   ('1500R','ROSEWILL',1500,1,'80 plus titanium',null,359.99),
   ('1500EN','ENERMAX',1500,1,'80 plus gold',null,550.00),
-  ('1200C','CORSAIR',1200,1,'800 plus platinum',8.40,259.99),
+  ('1200C','CORSAIR',1200,1,'80 plus platinum',8.40,259.99),
   ('1200S','SILVERSTONE',1200,1,'80 plus platinum',7.28,239.99),
   ('1200R','ROSEWILL',1200,1,'80 plus gold',8.81,219.99),
   ('1200E','EVGA',1200,1,'80 plus platinum',8.00,308.00),
@@ -78,10 +79,9 @@ insert into powerSupply (name, brand, maxPower, fans, energyEfficiency, weight, 
     memoryStandard varchar(10),
     usbPorts int,
     PCIthree int,
-    price double(10,2)
+    price double(10,2),
     primary key (name),
-    foreign key (brand) reference makers (brand),
-    foreign key (socket) reference cpu (socket)
+    foreign key (brand) references makers (brand)
   );
 
 insert into motherboard (name, brand, socket, chipset, memoryCap,
@@ -155,7 +155,7 @@ create table ramSpeed (
   speed int,
   type varchar(15),
   primary key (speed),
-  foreign key (speed) reference ram (speed)
+  foreign key (speed) references ram (speed)
 );
 
 insert into ramSpeed (speed, tpye) values
@@ -173,10 +173,26 @@ create table videoCard (
   coreClock int,
   gpu varchar(30),
   price double(10,2)
-  foreign key (brand) reference makers (brand),
-  foreign key (gpu) reference gpu (gpu),
+  foreign key (brand) references makers (brand),
+  foreign key (gpu) references gpu (gpu),
   primary key (name)
 );
+
+create table gpu (
+  gpu varchar(30),
+  memory int,
+  memoryType varchar(10),
+  memoryInterface int,
+  primary key (gpu)
+);
+
+insert into gpu (gpu, memory, memoryType, memoryInterface)
+values
+  ('GeForce GTX 1080 Ti',11,'GDDR5X',352),
+  ('GeForce GTX 1080',8,GDDR5X,256),
+  ('GeForce GTX 1060',3,'GDDR5X',192),
+  ('GeForce GTX 1050',2,'GDDR5',128),
+  ('Radeon Vega Frontier Edition',16,'HBM2',2048);
 
 insert int videoCard (name, brand, coreClock, gpu, price) values
   ('1080tiA','ASUS',1480,'GeForce GTX 1080 Ti',739.77),
@@ -205,22 +221,6 @@ insert int videoCard (name, brand, coreClock, gpu, price) values
   ('1050Z','ZOTAC',1354,'GeForce GTX 1050',109.99),
   ('vegaA','AMD',1382,'Radeon Vega Frontier Edition',999.99),
   ('vegalcA','AMD',1382,'Radeon Vega Frontier Edition',1499.99);
-
-create table gpu (
-  gpu varchar(30),
-  memory int,
-  memoryType varchar(10),
-  memoryInterface int,
-  primary key (gpu)
-);
-
-insert into gpu (gpu, memory, memoryType, memoryInterface)
-values
-  ('GeForce GTX 1080 Ti',11,'GDDR5X',352),
-  ('GeForce GTX 1080',8,GDDR5X,256),
-  ('GeForce GTX 1060',3,'GDDR5X',192),
-  ('GeForce GTX 1050',2,'GDDR5',128),
-  ('Radeon Vega Frontier Edition',16,'HBM2',2048);
 
 CREATE TABLE cpu (
 	name VARCHAR(30),
