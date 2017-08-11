@@ -63,7 +63,7 @@ th, td {
                   <?php
                   $cname = $_GET['cname'];
                   $conn = get_connection();
-                  $query = $conn->prepare("SELECT name, brand, series, speed, core, thread, socket, gen, l3, tdp, price, turbo, l2 FROM cpu WHERE name = $cname");
+                  $query = $conn->prepare("SELECT name, brand, series, speed, core, thread, socket, gen, lthree, tdp, price, turbo, ltwo FROM cpu WHERE name = $cname");
                   $query->execute();
                   $result = $query->fetchAll(); // this will hold a 2d array of all retrieved elements
 
