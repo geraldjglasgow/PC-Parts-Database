@@ -157,7 +157,7 @@ create table ramSpeed (
   primary key (speed)
 );
 
-insert into ramSpeed (speed, tpye) values
+insert into ramSpeed (speed, type) values
   (4333,'288-Pin DDR4'),
   (4266,'288-Pin DDR4'),
   (4133,'288-Pin DDR4'),
@@ -187,13 +187,13 @@ create table videoCard (
   brand varchar(30),
   coreClock int,
   gpu varchar(30),
-  price double(10,2)
+  price double(10,2),
   foreign key (brand) references makers (brand),
   foreign key (gpu) references gpu (gpu),
   primary key (name)
 );
 
-insert int videoCard (name, brand, coreClock, gpu, price) values
+insert into videoCard (name, brand, coreClock, gpu, price) values
   ('1080tiA','ASUS',1480,'GeForce GTX 1080 Ti',739.77),
   ('1080tiE','EVGA',1556,'GeForce GTX 1080 Ti',749.99),
   ('1080tiG','GIGABYTE',1544,'GeForce GTX 1080 Ti',719.99),
@@ -235,7 +235,7 @@ CREATE TABLE cpu (
 	series VARCHAR(12),
 	turbo DECIMAL(2,1),
 	ltwo DOUBLE,
-  foreign key(brand) reference makers (brand),
+  foreign key(brand) references makers (brand),
 	PRIMARY KEY(name)
 );
 
