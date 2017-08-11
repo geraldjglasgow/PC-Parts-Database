@@ -5,6 +5,7 @@ create table makers (
   directLink varchar(60),
   primary key (brand, type)
 );
+
 insert into makers (brand, type, directLink) values
   ('intel','cpu','https://www.intel.com/content/www/us/en/homepage.html'),
   ('AMD','cpu','http://www.amd.com/en/home'),
@@ -19,18 +20,54 @@ insert into makers (brand, type, directLink) values
   ('ZOTAC','gpu','https://www.zotac.com/'),
   ('G.SKILL','ram','https://www.gskill.com/en/')
   ('CORSAIR','ram','http://www.corsair.com/en-us'),
-  ('TEAM','ram','http://www.teamgroupinc.com/en/index.php');
+  ('TEAM','ram','http://www.teamgroupinc.com/en/index.php'),
+  ('SILVERSTONE','power supply','http://www.silverstonetek.com/'),
+  ('ROSEWILL','power supply','http://www.rosewill.com/'),
+  ('ENERMAX','poewer supply','http://www.enermaxusa.com/');
 
-  create table powerSupply (
-    name varchar(30),
-    brand varchar(30),
-    maxPower int,
-    fans int,
-    energyEfficiency varchar(20)
-  );
+create table powerSupply (
+  name varchar(30),
+  brand varchar(30),
+  maxPower int,
+  fans int,
+  energyEfficiency varchar(20),
+  weight double(4,2),
+  price double(10,2),
+  primary key (name)
+);
 
-  insert into powerSupply (name, brand, maxPower, fans, energyEfficiency) values
-    ()
+insert into powerSupply (name, brand, maxPower, fans, energyEfficiency, weight, price) values
+  ('1600E','EVGA',1600,1,'80 plus platinum',8.00,449.99),
+  ('1600R','ROSEWILL',1600,1,'80 plus gold',7.70,549.99),
+  ('1500C','CORSAIR',1500,1,'80 plus titanium',12.65,449.99),
+  ('1500S','SILVERSTONE',1500,1,'80 plus gold',7.05,337.34),
+  ('1500R','ROSEWILL',1500,1,'80 plus titanium',null,359.99),
+  ('1500EN','ENERMAX',1500,1,'80 plus gold',null,550.00),
+  ('1200C','CORSAIR',1200,1,'800 plus platinum',8.40,259.99),
+  ('1200S','SILVERSTONE',1200,1,'80 plus platinum',7.28,239.99),
+  ('1200R','ROSEWILL',1200,1,'80 plus gold',8.81,219.99),
+  ('1200E','EVGA',1200,1,'80 plus platinum',8.00,308.00),
+  ('1000C','CORSAIR',1000,1,'80 plus gold',4.41,178.99),
+  ('1000E','EVGA',1000,1,'80 plus gold',7.00,209.99),
+  ('1000R','ROSEWILL',1000,1,'80 plus bronze',6.23,139.99),
+  ('1000EN','ENERMAX',1000,1,'80 plus platinum',null,194.92),
+  ('1000S','SILVERSTONE',1000,1,'80 plus silver',6.60,179.89),
+  ('850C','CORSAIR',850,1,'80 plus gold',4.38,115.99),
+  ('850E','EVGA',850,1,'80 plus gold',6.00,159.99),
+  ('850R','ROSEWILL',850,1,'80 plus bronze',null,65.99),
+  ('850S','SILVERSTONE',850,1,'80 plus gold',5.51,159.99),
+  ('850EN','ENERMAX',850,1,'80 plus platinum',7.85,145.20),
+  ('600E','EVGA',600,1,'80 plus bronze',4.00,54.99),
+  ('600C','CORSAIR',600,1,'80 plus bronze',4.55,69.99),
+  ('600R','ROSEWILL',600,1,'80 plus bronze',null,54.99),
+  ('600S','SILVERSTONE',600,1,'80 plus gold',3.20,117.31),
+  ('600EN','ENERMAX',600,1,'80 plus platinum',null,144.45),
+  ('500E','EVGA',500,1,'80 plus bronze',4.00,49.99),
+  ('500C','CORSAIR',500,1,'80 plus white',4.06,39.99),
+  ('500R','ROSEWILL',500,1,'80 plus bronze',5.11,54.99),
+  ('500S','SILVERSTONE',500,1,'80 plus gold',null,89.99),
+  ('500EN','ENERMAX',500,2,'80 plus platinum',6.97,125.25),
+  ('500G','GIGABYTE',500,1,'80 plus bronze',null,69.99);
 
   create table motherboard (
     name varchar(30),
@@ -40,7 +77,7 @@ insert into makers (brand, type, directLink) values
     memoryCap int,
     memoryStandard varchar(10),
     usbPorts int,
-    PCI int,
+    PCIthree int,
     price double(10,2)
     primary key (name),
     foreign key (brand) reference makers (brand),
@@ -48,7 +85,7 @@ insert into makers (brand, type, directLink) values
   );
 
 insert into motherboard (name, brand, socket, chipset, memoryCap,
-memoryStandard, usbPorts, PCI3, price) values
+memoryStandard, usbPorts, PCIthree, price) values
   ('am4B','BIOSTAR','AM4','AMD X370',32,'DDR4',7,1,109.99),
   ('am4AR','ASROCK','AM4','AMD Promontory B350',64,'DDR4',7,1,74.99),
   ('am4A','ASUS','AM4','AMD B350',64,'DDR4',8,1,89,99),
@@ -167,8 +204,7 @@ insert int videoCard (name, brand, coreClock, gpu, price) values
   ('1050P','PNY',1354,'GeForce GTX 1050',119.99),
   ('1050Z','ZOTAC',1354,'GeForce GTX 1050',109.99),
   ('vegaA','AMD',1382,'Radeon Vega Frontier Edition',999.99),
-  ('vegalcA','AMD',1382,'Radeon Vega Frontier Edition',1499.99)
-
+  ('vegalcA','AMD',1382,'Radeon Vega Frontier Edition',1499.99);
 
 create table gpu (
   gpu varchar(30),
@@ -184,7 +220,7 @@ values
   ('GeForce GTX 1080',8,GDDR5X,256),
   ('GeForce GTX 1060',3,'GDDR5X',192),
   ('GeForce GTX 1050',2,'GDDR5',128),
-  ('Radeon Vega Frontier Edition',16,'HBM2',2048)
+  ('Radeon Vega Frontier Edition',16,'HBM2',2048);
 
 CREATE TABLE cpu (
 	name VARCHAR(30),
@@ -194,17 +230,17 @@ CREATE TABLE cpu (
 	core INT,
 	thread INT,
 	speed DECIMAL(2,1),
-	l3 DOUBLE,
+	lthree DOUBLE,
 	tdp INT,
 	price DECIMAL(6,2),
 	series VARCHAR(12),
 	turbo DECIMAL(2,1),
-	l2 DOUBLE,
+	ltwo DOUBLE,
   foreign key(brand) reference makers (brand),
 	PRIMARY KEY(name)
 );
 
-INSERT INTO cpu (name, brand, gen, socket, core, thread, speed, l3, tdp, price, series, turbo, l2)
+INSERT INTO cpu (name, brand, gen, socket, core, thread, speed, lthree, tdp, price, series, turbo, ltwo)
 VALUES
 ('7900X','Intel','SkyLakeX','LGA 2066',10,20,3.3,13.75,140,1059.99,'i9',4.3,10),
 ('7820X','Intel','SkyLakeX','LGA 2066',8,16,3.6,11,140,599.99,'i7',4.3,8),
