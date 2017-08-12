@@ -37,7 +37,7 @@
           <a href="./parts/gpu/gpu.php" class="list-group-item">Video Cards</a>
           <a href="./parts/ram/ram.php" class="list-group-item">Memory</a>
           <a href="./parts/mobo/mobo.php" class="list-group-item">Motherboards</a>
-          <a href="./parts/psu/psu.php class="list-group-item">Power Supplies</a>
+          <a href="./parts/psu/psu.php" class="list-group-item">Power Supplies</a>
         </div>
       </div>
       <!-- end sidebar -->
