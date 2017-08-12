@@ -20,6 +20,9 @@ VALUES
   ('ZOTAC','gpu','https://www.zotac.com/'),
   ('G.SKILL','ram','https://www.gskill.com/en/'),
   ('CORSAIR','ram','http://www.corsair.com/en-us'),
+  ('ENERMAX','psu', NULL),
+  ('SILVERSTONE','psu', NULL),
+  ('ROSEWILL', 'psu', NULL),
   ('TEAM','ram','http://www.teamgroupinc.com/en/index.php');
 
   CREATE TABLE socketType (
