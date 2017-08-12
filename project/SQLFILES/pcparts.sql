@@ -27,9 +27,9 @@ VALUES
   ('ZOTAC','gpu','https://www.zotac.com/'),
   ('G.SKILL','ram','https://www.gskill.com/en/'),
   ('CORSAIR','ram','http://www.corsair.com/en-us'),
-  ('ENERMAX','psu', NULL),
-  ('SILVERSTONE','psu', NULL),
-  ('ROSEWILL', 'psu', NULL),
+  ('ENERMAX','psu', 'http://www.enermaxusa.com/'),
+  ('SILVERSTONE','psu', 'http://www.silverstonetek.com/'),
+  ('ROSEWILL', 'psu', 'http://www.rosewill.com/'),
   ('TEAM','ram','http://www.teamgroupinc.com/en/index.php');
 UNLOCK TABLES;
 
