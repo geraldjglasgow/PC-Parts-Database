@@ -289,10 +289,48 @@ VALUES
 ('1200','AMD','SummitRidge','AM4',4,4,3.1,8,65,109.99, 'Ryzen 3',3.4,2);
 
 
-create table powerSupply (
-  name varchar(30),
-  brand varchar(30),
-  maxPower int,
-  fans int,
-  energyEfficiency varchar(20)
+CREATE TABLE psu (
+  name VARCHAR (30),
+  brand VARCHAR (30),
+  maxPower INT,
+  fans INT,
+  energyEfficiency VARCHAR (20),
+  weight DOUBLE (4,2),
+  price DECIMAL(6,2),
+  PRIMARY KEY (name),
+  FOREIGN KEY (brand) REFERENCES makers (brand)
 );
+
+INSERT INTO psu (name, brand, maxPower, fans, energyEfficiency, weight, price)
+VALUES
+  ('1600E','EVGA',1600,1,'80 plus platinum',8.00,449.99),
+  ('1600R','ROSEWILL',1600,1,'80 plus gold',7.70,549.99),
+  ('1500C','CORSAIR',1500,1,'80 plus titanium',12.65,449.99),
+  ('1500S','SILVERSTONE',1500,1,'80 plus gold',7.05,337.34),
+  ('1500R','ROSEWILL',1500,1,'80 plus titanium',7.70,359.99),
+  ('1500EN','ENERMAX',1500,1,'80 plus gold',7.09,550.00),
+  ('1200C','CORSAIR',1200,1,'80 plus platinum',8.40,259.99),
+  ('1200S','SILVERSTONE',1200,1,'80 plus platinum',7.28,239.99),
+  ('1200R','ROSEWILL',1200,1,'80 plus gold',8.81,219.99),
+  ('1200E','EVGA',1200,1,'80 plus platinum',8.00,308.00),
+  ('1000C','CORSAIR',1000,1,'80 plus gold',4.41,178.99),
+  ('1000E','EVGA',1000,1,'80 plus gold',7.00,209.99),
+  ('1000R','ROSEWILL',1000,1,'80 plus bronze',6.23,139.99),
+  ('1000EN','ENERMAX',1000,1,'80 plus platinum',6.21,194.92),
+  ('1000S','SILVERSTONE',1000,1,'80 plus silver',6.60,179.89),
+  ('850C','CORSAIR',850,1,'80 plus gold',4.38,115.99),
+  ('850E','EVGA',850,1,'80 plus gold',6.00,159.99),
+  ('850R','ROSEWILL',850,1,'80 plus bronze',3.80,65.99),
+  ('850S','SILVERSTONE',850,1,'80 plus gold',5.51,159.99),
+  ('850EN','ENERMAX',850,1,'80 plus platinum',7.85,145.20),
+  ('600E','EVGA',600,1,'80 plus bronze',4.00,54.99),
+  ('600C','CORSAIR',600,1,'80 plus bronze',4.55,69.99),
+  ('600R','ROSEWILL',600,1,'80 plus bronze',4.00,54.99),
+  ('600S','SILVERSTONE',600,1,'80 plus gold',3.20,117.31),
+  ('600EN','ENERMAX',600,1,'80 plus platinum',3.58,144.45),
+  ('500E','EVGA',500,1,'80 plus bronze',4.00,49.99),
+  ('500C','CORSAIR',500,1,'80 plus white',4.06,39.99),
+  ('500R','ROSEWILL',500,1,'80 plus bronze',5.11,54.99),
+  ('500S','SILVERSTONE',500,1,'80 plus gold',6.53,89.99),
+  ('500EN','ENERMAX',500,2,'80 plus platinum',6.97,125.25),
+  ('500G','GIGABYTE',500,1,'80 plus bronze',4.55,69.99);
