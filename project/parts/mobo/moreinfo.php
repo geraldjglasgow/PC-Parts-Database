@@ -52,7 +52,7 @@ th, td {
             <div class="col-md-2">
                 <a style = "text-decoration:none" href = "../../index.php"><p class="lead">PC Parts Database</p></a>
                 <div class="list-group">
-                    <a href="./cpu.php" class="list-group-item">Processors</a>
+                    <a href="./mobo.php" class="list-group-item">Motherboards</a>
                 </div>
             </div>
           <!-- end sidebar -->
@@ -63,78 +63,56 @@ th, td {
                   <?php
                   $cname = $_GET['cname'];
                   $conn = get_connection();
-                  $query = $conn->prepare("SELECT name, brand, series, speed, core, thread, socket, gen, lthree, tdp, price, turbo, ltwo FROM cpu WHERE name = $cname");
+                  $query = $conn->prepare("SELECT brand,type,price,socket,chipset,memoryCap,memoryStandard,usbPorts,PCI,name FROM mobo WHERE name = '$cname'");
                   $query->execute();
                   $result = $query->fetchAll(); // this will hold a 2d array of all retrieved elements
 
                   echo '
                     <div class="col-sm-12 col-lg-12 col-md-12 text-center">
                       <div class="thumbnail">
-                          <img style="width:180px; height:135px;" src="../../pictures/cpu/'.$result[0][0].'.jpg" alt="'.$result[0][0].'">
+                          <img style="width:180px; height:135px;" src="../../pictures/mobo/'.$result[0][9].'.jpg" alt="'.$result[0][9].'">
                           <div class="caption">
-                              <h4>'.$result[0][1].' '.$result[0][2].' '.$result[0][0].'</h4>
-                              <p>'.$result[0][3].' GHz Base Clock<br />
-                                '.$result[0][4].' Core '.$result[0][5].' Thread<br />
-                                '.$result[0][6].' socket<br />
-                                $'.$result[0][10].'<br />
-                              </p>
-                              <p>
+                          <h4>'.$result[0][0].'</h4>
+                          <p>$'.$result[0][2].'<br />
+                          '.$result[0][1].' '.$result[0][3].'<br />
+                          '.$result[0][4].' chipset<br />
+                          </p>
                             </div>
                           </div>
                             <div class="thumbnail">
                             <h4>Specifications</h4>
                                 <table align="center" style="width:35%">
                                   <tr>
-                                    <th>Name</th>
+                                    <th>Brand</th>
                                     <td>'.$result[0][0].'</td>
                                   </tr>
                                   <tr>
                                     <th>Price</th>
-                                    <td>$'.$result[0][10].'</td>
+                                    <td>$'.$result[0][2].'</td>
                                   </tr>
                                   <tr>
-                                    <th>Brand</th>
+                                    <th>Type</th>
                                     <td>'.$result[0][1].'</td>
                                   </tr>
                                   <tr>
-                                    <th>Generation</th>
-                                    <td>'.$result[0][7].'</td>
-                                  </tr>
-                                  <tr>
-                                    <th>Series</th>
-                                    <td>'.$result[0][2].'</td>
-                                  </tr>
-                                  <tr>
                                     <th>Socket</th>
-                                    <td>'.$result[0][6].'</td>
+                                    <td>'.$result[0][3].' GB</td>
                                   </tr>
                                   <tr>
-                                    <th>Base Clock</th>
-                                    <td>'.$result[0][3].' GHz</td>
+                                    <th>Chipset</th>
+                                    <td>'.$result[0][4].' MHz</td>
                                   </tr>
                                   <tr>
-                                    <th>Turbo Clock</th>
-                                    <td>'.$result[0][11].' GHz</td>
-                                  </tr>
-                                  <tr>
-                                    <th># Cores</th>
-                                    <td>'.$result[0][4].'</td>
-                                  </tr>
-                                  <tr>
-                                    <th># Threads</th>
+                                    <th>Memory Type</th>
                                     <td>'.$result[0][5].'</td>
                                   </tr>
                                   <tr>
-                                    <th>L3 Cashe</th>
-                                    <td>'.$result[0][8].'MB</td>
+                                    <th>USB Ports</th>
+                                    <td>'.$result[0][6].'</td>
                                   </tr>
                                   <tr>
-                                    <th>L2 Cashe</th>
-                                    <td>'.$result[0][12].'MB</td>
-                                  </tr>
-                                  <tr>
-                                    <th>TDP</th>
-                                    <td>'.$result[0][9].' Watts</td>
+                                    <th>PCIE Slots</th>
+                                    <td>'.$result[0][7].'</td>
                                   </tr>
                                 </table>
                               </p>

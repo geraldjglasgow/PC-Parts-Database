@@ -5,7 +5,7 @@ body {
 }
 
 .caption {
-    height: 150pt;
+    height: auto;
     overflow: hidden;
 }
 

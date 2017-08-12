@@ -38,7 +38,7 @@
       <div class="col-md-2">
         <a href = "/PC-Parts-Database/project/index.php" style = "text-decoration:none"><p class="lead">PC Parts Database</p></a>
         <div class="list-group">
-          <a href="gpu.php" class="list-group-item">Video Cards</a>
+          <a href="ram.php" class="list-group-item">Memory</a>
         </div>
 
         <?php include('./sidebar.php'); ?>
@@ -54,10 +54,10 @@
           $table = rtrim(key($get_array), '1234567890 ');
           $get_array = array_values($get_array);
           if($table == ""){
-            $q = "SELECT gpu, brand, coreClock, price, name,memory FROM gpumem NATURAL JOIN videoCard";
+            $q = "SELECT brand,price,type,capacity,name FROM ram NATURAL JOIN ramSpeed";
             $query = $conn->prepare($q);
           } else{
-          $q = "SELECT gpu, brand, coreClock, price, name, memory FROM gpumem NATURAL JOIN videoCard WHERE ";
+          $q = "SELECT brand,price,type,capacity,name FROM ram NATURAL JOIN ramSpeed WHERE ";
           while($i < sizeof($get_array)){
             $q .= "$table = '";
             $q .= $get_array[$i];
@@ -85,12 +85,13 @@
             echo '
             <div class="col-sm-5 col-lg-3 col-md-4 text-center">
             <div class="thumbnail">
-            <img src="../../pictures/gpu/'.$result[$j][4].'.jpg" alt="'.$result[$j][4].'">
+            <img src="../../pictures/ram/'.$result[$j][4].'.jpg" alt="'.$result[$j][4].'">
             <div class="caption">
-            <h4>'.$result[$j][1].' '.$result[$j][0].'</h4>
-            <p">$'.$result[$j][3].'<br />
-            '.$result[$j][2].' MHz Core Clock<br />
-            '.$result[$j][5].'GB Video Memory<br />
+            <h4>'.$result[$j][0].'</h4>
+            <p>$'.$result[$j][1].'<br />
+            '.$result[$j][2].'<br />
+            '.$result[$j][3].' GB<br />
+
             </p>
             <a href="./moreinfo.php?cname='.$result[$j][4].'">More Info</a>
             </div>
