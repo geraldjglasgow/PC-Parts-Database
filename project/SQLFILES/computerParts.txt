@@ -22,13 +22,70 @@ VALUES
   ('CORSAIR','ram','http://www.corsair.com/en-us'),
   ('TEAM','ram','http://www.teamgroupinc.com/en/index.php');
 
-  create table powerSupply (
-    name varchar(30),
-    brand varchar(30),
-    maxPower int,
-    fans int,
-    energyEfficiency varchar(20)
+  CREATE TABLE socketType (
+    socket VARCHAR (12),
+    PRIMARY KEY(socket)
   );
+
+INSERT INTO socketType (socket)
+VALUES
+  ('AM4'),
+  ('LGA 1151'),
+  ('LGA 2066'),
+  ('LGA 2011-v3');
+
+
+CREATE TABLE ramSpeed (
+  speed INT,
+  type VARCHAR (15),
+  PRIMARY KEY (speed)
+);
+
+INSERT INTO ramSpeed (speed, type)
+VALUES
+  (4333,'288-Pin DDR4'),
+  (4266,'288-Pin DDR4'),
+  (4200,'288-Pin DDR4'),
+  (4133,'288-Pin DDR4'),
+  (4000,'288-Pin DDR4'),
+  (3866,'288-Pin DDR4'),
+  (2400,'240-Pin DDR3'),
+  (2133,'240-Pin DDR3');
+
+CREATE TABLE gpumem (
+  gpu VARCHAR (30),
+  memory INT,
+  memoryType VARCHAR (10),
+  memoryInterface INT,
+  PRIMARY KEY (gpu)
+);
+
+INSERT INTO gpumem (gpu, memory, memoryType, memoryInterface)
+VALUES
+  ('GeForce GTX 1080 Ti',11,'GDDR5X',352),
+  ('GeForce GTX 1080',8,'GDDR5X',256),
+  ('GeForce GTX 1060',3,'GDDR5X',192),
+  ('GeForce GTX 1050',2,'GDDR5',128),
+  ('Radeon Vega Frontier Edition',16,'HBM2',2048);
+
+CREATE TABLE ramSpeed (
+  speed INT,
+  type VARCHAR (15),
+  PRIMARY KEY (speed)
+);
+
+INSERT INTO ramSpeed (speed, type)
+VALUES
+  (4333,'288-Pin DDR4'),
+  (4266,'288-Pin DDR4'),
+  (4200,'288-Pin DDR4'),
+  (4133,'288-Pin DDR4'),
+  (4000,'288-Pin DDR4'),
+  (3866,'288-Pin DDR4'),
+  (2400,'240-Pin DDR3'),
+  (2133,'240-Pin DDR3');
+
+
 
 CREATE TABLE mobo (
   name VARCHAR (30),
@@ -42,22 +99,10 @@ CREATE TABLE mobo (
   price DECIMAL(6,2),
   type VARCHAR (5),
   PRIMARY KEY (name),
-  FOREIGN KEY (brand) REFERENCES makers (brand),
-  FOREIGN KEY (socket) REFERENCES socketType (socket),
-  FOREIGN KEY (type) REFERENCES makers (brand)
+  FOREIGN KEY (brand) REFERENCES makers (brand) ON DELETE CASCADE,
+  FOREIGN KEY (socket) REFERENCES socketType (socket) ON DELETE CASCADE,
+  FOREIGN KEY (type) REFERENCES makers (brand) ON DELETE SET NULL
 );
-
-CREATE TABLE socketType (
-  socket VARCHAR (12),
-  PRIMARY KEY(socket)
-);
-
-INSERT INTO socketType (socket)
-VALUES
-  ('AM4'),
-  ('LGA 1151'),
-  ('LGA 2066'),
-  ('LGA 2011-v3');
 
 
 INSERT INTO mobo (name, brand, socket, chipset, memoryCap, memoryStandard, usbPorts, PCI, price, type)
@@ -91,8 +136,8 @@ CREATE TABLE ram (
   cas INT,
   price DECIMAL(6,2),
   PRIMARY KEY (name),
-  FOREIGN KEY (brand) REFERENCES makers (brand),
-  FOREIGN KEY (speed) REFERENCES ramSpeed (speed)
+  FOREIGN KEY (brand) REFERENCES makers (brand) ON DELETE CASCADE,
+  FOREIGN KEY (speed) REFERENCES ramSpeed (speed) ON DELETE SET NULL
 );
 
 INSERT INTO ram (name, brand, capacity, speed, timing, cas, price)
@@ -127,22 +172,7 @@ VALUES
   ('2133sniG.S','G.SKILL',8,2133,'10-12-12-31',10,65.99),
   ('2133triG.S','G.SKILL',16,2133,'9-11-11-31',9,122.99);
 
-CREATE TABLE ramSpeed (
-  speed INT,
-  type VARCHAR (15),
-  PRIMARY KEY (speed)
-);
 
-INSERT INTO ramSpeed (speed, type)
-VALUES
-  (4333,'288-Pin DDR4'),
-  (4266,'288-Pin DDR4'),
-  (4200,'288-Pin DDR4'),
-  (4133,'288-Pin DDR4'),
-  (4000,'288-Pin DDR4'),
-  (3866,'288-Pin DDR4'),
-  (2400,'240-Pin DDR3'),
-  (2133,'240-Pin DDR3');
 
 CREATE TABLE videoCard (
   name VARCHAR (30),
@@ -151,8 +181,8 @@ CREATE TABLE videoCard (
   gpu VARCHAR(30),
   price DECIMAL(6,2),
   PRIMARY KEY (name),
-  FOREIGN KEY (brand) REFERENCES makers (brand),
-  FOREIGN KEY (gpu) REFERENCES gpumem (gpu)
+  FOREIGN KEY (brand) REFERENCES makers (brand) ON DELETE CASCADE,
+  FOREIGN KEY (gpu) REFERENCES gpumem (gpu) ON DELETE CASCADE
 );
 
 INSERT INTO videoCard (name, brand, coreClock, gpu, price)
@@ -185,21 +215,7 @@ VALUES
   ('vegalcA','AMD',1382,'Radeon Vega Frontier Edition',1499.99);
 
 
-CREATE TABLE gpumem (
-  gpu VARCHAR (30),
-  memory INT,
-  memoryType VARCHAR (10),
-  memoryInterface INT,
-  PRIMARY KEY (gpu)
-);
 
-INSERT INTO gpumem (gpu, memory, memoryType, memoryInterface)
-VALUES
-  ('GeForce GTX 1080 Ti',11,'GDDR5X',352),
-  ('GeForce GTX 1080',8,'GDDR5X',256),
-  ('GeForce GTX 1060',3,'GDDR5X',192),
-  ('GeForce GTX 1050',2,'GDDR5',128),
-  ('Radeon Vega Frontier Edition',16,'HBM2',2048);
 
 CREATE TABLE cpu (
   name VARCHAR(30),
@@ -216,8 +232,8 @@ CREATE TABLE cpu (
   turbo DECIMAL(2,1),
   ltwo DOUBLE,
   PRIMARY KEY(name),
-  FOREIGN KEY (brand) REFERENCES makers (brand),
-  FOREIGN KEY (socket) REFERENCES socketType (socket)
+  FOREIGN KEY (brand) REFERENCES makers (brand) ON DELETE CASCADE,
+  FOREIGN KEY (socket) REFERENCES socketType (socket) ON DELETE CASCADE
 );
 
 INSERT INTO cpu (name, brand, gen, socket, core, thread, speed, lthree, tdp, price, series, turbo, ltwo)
@@ -271,3 +287,12 @@ VALUES
 ('1400','AMD','SummitRidge','AM4',4,8,3.2,8,65,164.99, 'Ryzen 5',3.4,2),
 ('1300X','AMD','SummitRidge','AM4',4,4,3.5,8,65,129.99, 'Ryzen 3',3.7,2),
 ('1200','AMD','SummitRidge','AM4',4,4,3.1,8,65,109.99, 'Ryzen 3',3.4,2);
+
+
+create table powerSupply (
+  name varchar(30),
+  brand varchar(30),
+  maxPower int,
+  fans int,
+  energyEfficiency varchar(20)
+);
