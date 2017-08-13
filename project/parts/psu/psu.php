@@ -54,10 +54,10 @@
           $table = rtrim(key($get_array), '1234567890 ');
           $get_array = array_values($get_array);
           if($table == ""){
-            $q = "SELECT name, brand, series, speed, core, thread, socket, price FROM cpu";
+            $q = "SELECT brand, price, energyEfficiency,maxPower,name FROM psu";
             $query = $conn->prepare($q);
           } else{
-          $q = "SELECT name, brand, series, speed, core, thread, socket, price FROM cpu WHERE ";
+          $q = "SELECT brand, price, energyEfficiency,maxPower,name FROM psu WHERE ";
           while($i < sizeof($get_array)){
             $q .= "$table = '";
             $q .= $get_array[$i];
@@ -85,15 +85,14 @@
             echo '
             <div class="col-sm-5 col-lg-3 col-md-4 text-center">
             <div class="thumbnail">
-            <img src="../../pictures/cpu/'.$result[$j][0].'.jpg" alt="'.$result[$j][0].'">
+            <img src="../../pictures/psu/'.$result[$j][4].'.jpg" alt="'.$result[$j][4].'">
             <div class="caption">
-            <h4>'.$result[$j][1].' '.$result[$j][2].' '.$result[$j][0].'</h4>
-            <p">'.$result[$j][3].'GHz Base Clock<br />
-            '.$result[$j][4].' Core '.$result[$j][5].' Thread<br />
-            '.$result[$j][6].' socket<br />
-            $'.$result[$j][7].'<br />
+            <h4>'.$result[$j][0].'</h4>
+            <p>$'.$result[$j][1].'<br />
+            '.$result[$j][2].'<br />
+            '.$result[$j][3].' Watt<br />
             </p>
-            <a href="./moreinfo.php?cname='.$result[$j][0].'">More Info</a>
+            <a href="./moreinfo.php?cname='.$result[$j][4].'">More Info</a>
             </div>
             </div>
             </div>

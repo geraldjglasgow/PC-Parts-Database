@@ -3,12 +3,12 @@
 <div class="panel-group" id="accordion">
 <!-- ########################################################################################### -->
 <?php
-$headers = array("Brand","Price","Generation","Series","Base Clock","Max Turbo","# Core","# Thread","Socket","L3 Cashe", "L2 Cashe", "TDP");
-$columns = array("brand","price","gen","series","speed","turbo","core","thread","socket","lthree","ltwo","tdp");
+$headers = array("Brand","Price","Max Power","Efficiency","Fans","Weight");
+$columns = array("brand","price","maxPower","energyEfficiency","fans","weight");
 $a=0;
 while($a < sizeof($headers)){
   //get fields from database
-  $query = $conn->prepare("SELECT DISTINCT $columns[$a] FROM cpu WHERE $columns[$a] <> 'NULL' ORDER BY $columns[$a] ASC");
+  $query = $conn->prepare("SELECT DISTINCT $columns[$a] FROM psu WHERE $columns[$a] <> 'NULL' ORDER BY $columns[$a] ASC");
   $query->execute();
   $result = $query->fetchAll();
   echo '
@@ -21,7 +21,7 @@ while($a < sizeof($headers)){
     </div>
     <div id="collapse'.$a.'" class="panel-collapse collapse">
       <div class="panel-body">
-      <form action="/PC-Parts-Database/project/parts/cpu/cpu.php" method="get">';
+      <form action="/PC-Parts-Database/project/parts/psu/psu.php" method="get">';
       $b=0;
       while($b < sizeof($result)){
         echo '
