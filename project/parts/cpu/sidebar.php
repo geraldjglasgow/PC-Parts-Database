@@ -9,7 +9,13 @@ $a=0;
 while($a < sizeof($headers)){
   //get fields from database
   $query = $conn->prepare("SELECT DISTINCT $columns[$a] FROM cpu WHERE $columns[$a] <> 'NULL' ORDER BY $columns[$a] ASC");
-  $query->execute();
+  try {
+    $conn->beginTransaction();
+    $query->execute();
+    $conn->commit();
+  } catch (Exception $e) {
+    $db->rollback();
+  }
   $result = $query->fetchAll();
   echo '
   <div class="panel panel-default">

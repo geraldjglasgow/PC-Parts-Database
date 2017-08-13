@@ -64,7 +64,13 @@ th, td {
                   $cname = $_GET['cname'];
                   $conn = get_connection();
                   $query = $conn->prepare("SELECT gpu, brand, coreClock, price, memoryType, memory, memoryInterface, name FROM gpumem NATURAL JOIN videoCard WHERE name = '$cname'");
-                  $query->execute();
+                  try {
+                    $conn->beginTransaction();
+                    $query->execute();
+                    $conn->commit();
+                  } catch (Exception $e) {
+                    $db->rollback();
+                  }
                   $result = $query->fetchAll(); // this will hold a 2d array of all retrieved elements
 
                   echo '
