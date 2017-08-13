@@ -13,4 +13,21 @@ function get_connection(){
     echo "Connection failed: " . $e->getMessage();
    }
 }
+
+function execQuery($query, $conn) {
+  try {
+    $conn->beginTransaction();
+    $query->execute();
+    $conn->commit();
+    return $query;
+  } catch (Exception $e) {
+    $db->rollback();
+  }
+}
+
+function closeconn($conn){
+  $conn = null;
+  return $conn;
+}
+
 ?>
