@@ -54,10 +54,10 @@
           $table = rtrim(key($get_array), '1234567890 ');
           $get_array = array_values($get_array);
           if($table == ""){
-            $q = "SELECT name, brand, series, speed, core, thread, socket, price FROM cpu";
+            $q = "SELECT name, brand, series, speed, core, thread, socket, price, turbo FROM cpu";
             $query = $conn->prepare($q);
           } else{
-          $q = "SELECT name, brand, series, speed, core, thread, socket, price FROM cpu WHERE ";
+          $q = "SELECT name, brand, series, speed, core, thread, socket, price, turbo FROM cpu WHERE ";
           while($i < sizeof($get_array)){
             $q .= "$table = '";
             $q .= $get_array[$i];
@@ -88,7 +88,14 @@
             <img src="../../pictures/cpu/'.$result[$j][0].'.jpg" alt="'.$result[$j][0].'">
             <div class="caption">
             <h4>'.$result[$j][1].' '.$result[$j][2].' '.$result[$j][0].'</h4>
-            <p">'.$result[$j][3].'GHz Base Clock<br />
+            <p">'.$result[$j][3].'GHz Base Clock<br />';
+
+            if(isset($result[$j][8])){
+              echo ''.$result[$j][8].'GHz Turbo Boost<br />';
+            }
+
+
+              echo '
             '.$result[$j][4].' Core '.$result[$j][5].' Thread<br />
             '.$result[$j][6].' socket<br />
             $'.$result[$j][7].'<br />
