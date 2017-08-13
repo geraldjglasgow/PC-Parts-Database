@@ -2,6 +2,14 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/ `pcparts` /*!40100 DEFAULT CHARACTER SE
 
 USE 'pcparts';
 
+DROP TABLE IF EXISTS `cpu`;
+DROP TABLE IF EXISTS `psu`;
+DROP TABLE IF EXISTS `mobo`;
+DROP TABLE IF EXISTS `ram`;
+DROP TABLE IF EXISTS `videoCard`;
+DROP TABLE IF EXISTS `gpumem`;
+DROP TABLE IF EXISTS `ramSpeed`;
+DROP TABLE IF EXISTS `socketType`;
 DROP TABLE IF EXISTS `makers`;
 
 CREATE TABLE makers (
@@ -27,9 +35,9 @@ VALUES
   ('ZOTAC','gpu','https://www.zotac.com/'),
   ('G.SKILL','ram','https://www.gskill.com/en/'),
   ('CORSAIR','ram','http://www.corsair.com/en-us'),
-  ('ENERMAX','psu', 'http://www.enermaxusa.com/'),
-  ('SILVERSTONE','psu', 'http://www.silverstonetek.com/'),
-  ('ROSEWILL', 'psu', 'http://www.rosewill.com/'),
+  ('ENERMAX','psu', NULL),
+  ('SILVERSTONE','psu', NULL),
+  ('ROSEWILL', 'psu', NULL),
   ('TEAM','ram','http://www.teamgroupinc.com/en/index.php');
 UNLOCK TABLES;
 
