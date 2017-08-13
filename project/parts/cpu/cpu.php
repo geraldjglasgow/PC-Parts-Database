@@ -72,13 +72,7 @@
           $query = $conn->prepare($q);
           }
         }
-        try {
-          $conn->beginTransaction();
-          $query->execute();
-          $conn->commit();
-        } catch (Exception $e) {
-          $db->rollback();
-        }
+        $query = execQuery($query, $conn);
         $result = $query->fetchAll(); // this will hold a 2d array of all retrieved elements
        ?>
 
