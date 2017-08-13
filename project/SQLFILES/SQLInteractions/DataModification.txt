@@ -1,0 +1,35 @@
+MariaDB [pcparts]> INSERT INTO psu VALUES ('475E', 'EVGA', 500, 1, '80 plus gold', 3.21, 89.99);
+Query OK, 1 row affected (0.01 sec)
+
+
+
+MariaDB [pcparts]> INSERT INTO psu1 (SELECT DISTINCT brand FROM psu WHERE psu.price > 500);
+Query OK, 2 rows affected (0.01 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+
+/* All cpus are now able to turbo boost an extra .5Ghz. Update cpu to show this */
+
+MariaDB [pcparts]> UPDATE cpu SET turbo = turbo+0.5
+    -> WHERE turbo IS NOT NULL;
+Query OK, 30 rows affected (0.01 sec)
+Rows matched: 30  Changed: 30  Warnings: 0
+
+
+/* ASROCK motherboards dropped $50 in price. Update the mobo table to show this */
+
+MariaDB [pcparts]> UPDATE mobo SET price = price-50.0 WHERE brand LIKE 'ASROCK%';
+Query OK, 4 rows affected (0.00 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+
+/* remove all motherboard made by MSI*/
+
+MariaDB [pcparts]> DELETE FROM mobo WHERE brand='MSI';
+Query OK, 4 rows affected (0.01 sec)
+
+
+/* remove all cpus in the KabyLakeX lake generation */
+
+MariaDB [pcparts]> DELETE FROM cpu WHERE gen LIKE 'Kaby%X';
+Query OK, 2 rows affected (0.01 sec)
