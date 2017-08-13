@@ -123,11 +123,15 @@ th, td {
                                   <tr>
                                     <th>Base Clock</th>
                                     <td>'.$result[0][3].' GHz</td>
-                                  </tr>
+                                  </tr>';
+                                  if(isset($result[0][11])){
+                                  echo '
                                   <tr>
                                     <th>Turbo Clock</th>
                                     <td>'.$result[0][11].' GHz</td>
-                                  </tr>
+                                  </tr>';
+                                  }
+                                  echo '
                                   <tr>
                                     <th># Cores</th>
                                     <td>'.$result[0][4].'</td>
