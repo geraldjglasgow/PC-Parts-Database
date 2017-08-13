@@ -1,0 +1,117 @@
+first example shows an update getting rolled back
+select name, brand
+from videoCard
+where name = '1050A';
++-------+-------+
+| name  | brand |
++-------+-------+
+| 1050A | ASUS  |
++-------+-------+
+1 row in set (0.00 sec)
+
+start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+update videoCard set name = 'super cool chip' where name = '1050A';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+select name, brand
+from videoCard
+where name = 'super cool chip';
++-----------------+-------+
+| name            | brand |
++-----------------+-------+
+| super cool chip | ASUS  |
++-----------------+-------+
+1 row in set (0.00 sec)
+
+rollback;
+Query OK, 0 rows affected (0.01 sec)
+
+select name, brand
+from videoCard
+where name = '1050A';
++-------+-------+
+| name  | brand |
++-------+-------+
+| 1050A | ASUS  |
++-------+-------+
+1 row in set (0.00 sec)
+
+select name, brand
+from videoCard
+where name = 'super cool chip';
+Empty set (0.00 sec)
+
+second example shows a deletion getting rolled back
+select name, brand
+from ram
+where name = '4333venCOR';
++------------+---------+
+| name       | brand   |
++------------+---------+
+| 4333venCOR | CORSAIR |
++------------+---------+
+1 row in set (0.00 sec)
+
+start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+delete from ram where name = '4333venCOR';
+Query OK, 1 row affected (0.00 sec)
+
+select name, brand
+from ram
+where name = '4333venCOR';
+Empty set (0.00 sec)
+
+rollback;
+Query OK, 0 rows affected (0.00 sec)
+
+select name, brand
+from ram
+where name = '4333venCOR';
++------------+---------+
+| name       | brand   |
++------------+---------+
+| 4333venCOR | CORSAIR |
++------------+---------+
+1 row in set (0.00 sec)
+
+third example shows an insertion getting commited
+
+select brand, type
+from makers
+where brand = 'unitedChipMakers';
+Empty set (0.00 sec)
+
+start transaction;
+Query OK, 0 rows affected (0.00 sec)
+
+insert into makers (brand, type, directLink) values('unitedChipMakers','cpu','https://ucm.com/');
+Query OK, 1 row affected (0.00 sec)
+
+select brand, type
+from makers
+where brand = 'unitedChipMakers';
++------------------+------+
+| brand            | type |
++------------------+------+
+| unitedChipMakers | cpu  |
++------------------+------+
+1 row in set (0.00 sec)
+
+commit;
+Query OK, 0 rows affected (0.01 sec)
+
+select brand, type
+from makers
+where brand = 'unitedChipMakers';
++------------------+------+
+| brand            | type |
++------------------+------+
+| unitedChipMakers | cpu  |
++------------------+------+
+1 row in set (0.00 sec)
+
