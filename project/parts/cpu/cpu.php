@@ -88,14 +88,7 @@
             <img src="../../pictures/cpu/'.$result[$j][0].'.jpg" alt="'.$result[$j][0].'">
             <div class="caption">
             <h4>'.$result[$j][1].' '.$result[$j][2].' '.$result[$j][0].'</h4>
-            <p">'.$result[$j][3].'GHz Base Clock<br />';
-
-            if(isset($result[$j][8])){
-              echo ''.$result[$j][8].'GHz Turbo Boost<br />';
-            }
-
-
-              echo '
+            <p">'.$result[$j][3].'GHz Base Clock<br />
             '.$result[$j][4].' Core '.$result[$j][5].' Thread<br />
             '.$result[$j][6].' socket<br />
             $'.$result[$j][7].'<br />
