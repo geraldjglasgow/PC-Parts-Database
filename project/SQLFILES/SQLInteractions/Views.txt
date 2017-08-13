@@ -102,3 +102,41 @@ MariaDB [pcparts]> select * from cpumobocombo;                                  
 +----------+---------+-------+---------+
 95 rows in set (0.00 sec)
 
+
+
+MariaDB [pcparts]> CREATE VIEW evga (brand, chipset, card, energyEfficiency, maxPower, price) AS
+    -> (SELECT mobo.brand, mobo.chipset, videoCard.name, psu.energyEfficiency, psu.maxPower, psu.price+mobo.price+videoCard.price
+    -> FROM mobo, psu, videoCard
+    -> WHERE mobo.brand = 'EVGA' AND videoCard.brand = 'EVGA' AND psu.brand = 'EVGA');
+Query OK, 0 rows affected (0.07 sec)
+
+MariaDB [pcparts]> select * from evga;
++-------+---------+---------+------------------+----------+---------+
+| brand | chipset | card    | energyEfficiency | maxPower | price   |
++-------+---------+---------+------------------+----------+---------+
+| EVGA  | X99     | 1050E   | 80 plus gold     |     1000 |  544.97 |
+| EVGA  | X99     | 1050E   | 80 plus platinum |     1200 |  642.98 |
+| EVGA  | X99     | 1050E   | 80 plus platinum |     1600 |  784.97 |
+| EVGA  | X99     | 1050E   | 80 plus bronze   |      500 |  384.97 |
+| EVGA  | X99     | 1050E   | 80 plus bronze   |      600 |  389.97 |
+| EVGA  | X99     | 1050E   | 80 plus gold     |      850 |  494.97 |
+| EVGA  | X99     | 1060E   | 80 plus gold     |     1000 |  649.97 |
+| EVGA  | X99     | 1060E   | 80 plus platinum |     1200 |  747.98 |
+| EVGA  | X99     | 1060E   | 80 plus platinum |     1600 |  889.97 |
+| EVGA  | X99     | 1060E   | 80 plus bronze   |      500 |  489.97 |
+| EVGA  | X99     | 1060E   | 80 plus bronze   |      600 |  494.97 |
+| EVGA  | X99     | 1060E   | 80 plus gold     |      850 |  599.97 |
+| EVGA  | X99     | 1080E   | 80 plus gold     |     1000 |  979.97 |
+| EVGA  | X99     | 1080E   | 80 plus platinum |     1200 | 1077.98 |
+| EVGA  | X99     | 1080E   | 80 plus platinum |     1600 | 1219.97 |
+| EVGA  | X99     | 1080E   | 80 plus bronze   |      500 |  819.97 |
+| EVGA  | X99     | 1080E   | 80 plus bronze   |      600 |  824.97 |
+| EVGA  | X99     | 1080E   | 80 plus gold     |      850 |  929.97 |
+| EVGA  | X99     | 1080tiE | 80 plus gold     |     1000 | 1179.97 |
+| EVGA  | X99     | 1080tiE | 80 plus platinum |     1200 | 1277.98 |
+| EVGA  | X99     | 1080tiE | 80 plus platinum |     1600 | 1419.97 |
+| EVGA  | X99     | 1080tiE | 80 plus bronze   |      500 | 1019.97 |
+| EVGA  | X99     | 1080tiE | 80 plus bronze   |      600 | 1024.97 |
+| EVGA  | X99     | 1080tiE | 80 plus gold     |      850 | 1129.97 |
++-------+---------+---------+------------------+----------+---------+
+24 rows in set (0.00 sec)
