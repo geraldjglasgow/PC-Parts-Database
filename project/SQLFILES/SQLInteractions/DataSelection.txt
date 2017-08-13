@@ -1,0 +1,259 @@
+
+// find the most expensive pc
+
+MariaDB [pcparts]> SELECT max(c.price + v.price + m.price + r.price + p.price) AS MaxCost FROM cpu c, ram r, videoCard v, psu p, mobo m;
++---------+
+| MaxCost |
++---------+
+| 5210.34 |
++---------+
+
+// find the least expensive pc
+
+MariaDB [pcparts]> SELECT min(c.price + v.price + m.price + r.price + p.price) AS MaxCost FROM cpu c, ram r, videoCard v, psu p, mobo m;
++---------+
+| MaxCost |
++---------+
+|  323.95 |
++---------+
+1 row in set (11.28 sec)
+
+// find the price per core for all cpus in ascending order
+
+MariaDB [pcparts]> SELECT name, series, brand, price/core as PPC FROM cpu order by PPC;
++-------+--------------+-------+------------+
+| name  | series       | brand | PPC        |
++-------+--------------+-------+------------+
+| G3900 | Celeron      | Intel |  17.495000 |
+| G3930 | Celeron      | Intel |  19.995000 |
+| G3920 | Celeron      | Intel |  22.495000 |
+| G3950 | Celeron      | Intel |  24.995000 |
+| G4400 | Pentium      | Intel |  27.495000 |
+| 1200  | Ryzen 3      | AMD   |  27.497500 |
+| G4560 | Pentium      | Intel |  29.995000 |
+| G4500 | Pentium      | Intel |  32.495000 |
+| 1300X | Ryzen 3      | AMD   |  32.497500 |
+| G4600 | Pentium      | Intel |  34.995000 |
+| 1600  | Ryzen 5      | AMD   |  35.831667 |
+| G4520 | Pentium      | Intel |  37.495000 |
+| 1700  | Ryzen 7      | AMD   |  37.498750 |
+| 1600X | Ryzen 5      | AMD   |  38.331667 |
+| G4620 | Pentium      | Intel |  39.995000 |
+| 1400  | Ryzen 5      | AMD   |  41.247500 |
+| 1700X | Ryzen 7      | AMD   |  41.248750 |
+| 6400  | i5           | Intel |  46.247500 |
+| 7400  | i5           | Intel |  47.497500 |
+| 1500X | Ryzen 5      | AMD   |  47.497500 |
+| 6500  | i5           | Intel |  51.247500 |
+| 7500  | i5           | Intel |  52.497500 |
+| 6600  | i5           | Intel |  54.997500 |
+| 7600  | i5           | Intel |  57.497500 |
+| 1800X | Ryzen 7      | AMD   |  57.498750 |
+| 6800K | i7           | Intel |  58.331667 |
+| 6600K | i5           | Intel |  58.747500 |
+| 6100  | i3           | Intel |  59.995000 |
+| 7600K | i5           | Intel |  59.997500 |
+| 7640X | i5           | Intel |  62.497500 |
+| 1950X | ThreadRipper | AMD   |  62.499375 |
+| 7100  | i3           | Intel |  64.995000 |
+| 6850K | i7           | Intel |  64.998333 |
+| 1920X | ThreadRipper | AMD   |  66.665833 |
+| 6300  | i3           | Intel |  67.495000 |
+| 7300  | i3           | Intel |  74.995000 |
+| 7820X | i7           | Intel |  74.998750 |
+| 6700  | i7           | Intel |  76.247500 |
+| 6320  | i3           | Intel |  77.495000 |
+| 7700  | i7           | Intel |  77.497500 |
+| 7320  | i3           | Intel |  79.995000 |
+| 6700K | i7           | Intel |  82.497500 |
+| 7350K | i3           | Intel |  84.995000 |
+| 7700K | i7           | Intel |  84.997500 |
+| 7740X | i7           | Intel |  87.497500 |
+| 7800X | i7           | Intel |  88.331667 |
+| 7900X | i9           | Intel | 105.999000 |
+| 6900K | i7           | Intel | 131.248750 |
+| 6950X | i7           | Intel | 173.037000 |
++-------+--------------+-------+------------+
+49 rows in set (0.00 sec)
+
+
+// Find all Motherboard and CPU combinations that are less than $350
+
+MariaDB [pcparts]> select DISTINCT cpu.name, mobo.brand, mobo.socket, mobo.chipset ,mobo.price+cpu.price from cpu,mobo where cpu.socket = mobo.socket AND mobo.price+cpu.price < 350;
++-------+----------+----------+---------+----------------------+
+| name  | brand    | socket   | chipset | mobo.price+cpu.price |
++-------+----------+----------+---------+----------------------+
+| 1200  | ASUS     | AM4      | B350    |               199.98 |
+| 1300X | ASUS     | AM4      | B350    |               219.98 |
+| 1400  | ASUS     | AM4      | B350    |               254.98 |
+| 1500X | ASUS     | AM4      | B350    |               279.98 |
+| 1600  | ASUS     | AM4      | B350    |               304.98 |
+| 1600X | ASUS     | AM4      | B350    |               319.98 |
+| 1200  | ASROCK   | AM4      | B350    |               184.98 |
+| 1300X | ASROCK   | AM4      | B350    |               204.98 |
+| 1400  | ASROCK   | AM4      | B350    |               239.98 |
+| 1500X | ASROCK   | AM4      | B350    |               264.98 |
+| 1600  | ASROCK   | AM4      | B350    |               289.98 |
+| 1600X | ASROCK   | AM4      | B350    |               304.98 |
+| 1200  | BIOSTAR  | AM4      | X370    |               219.98 |
+| 1300X | BIOSTAR  | AM4      | X370    |               239.98 |
+| 1400  | BIOSTAR  | AM4      | X370    |               274.98 |
+| 1500X | BIOSTAR  | AM4      | X370    |               299.98 |
+| 1600  | BIOSTAR  | AM4      | X370    |               324.98 |
+| 1600X | BIOSTAR  | AM4      | X370    |               339.98 |
+| 1200  | GIGABYTE | AM4      | B350    |               219.98 |
+| 1300X | GIGABYTE | AM4      | B350    |               239.98 |
+| 1400  | GIGABYTE | AM4      | B350    |               274.98 |
+| 1500X | GIGABYTE | AM4      | B350    |               299.98 |
+| 1600  | GIGABYTE | AM4      | B350    |               324.98 |
+| 1600X | GIGABYTE | AM4      | B350    |               339.98 |
+| 1200  | MSI      | AM4      | B350    |               211.98 |
+| 1300X | MSI      | AM4      | B350    |               231.98 |
+| 1400  | MSI      | AM4      | B350    |               266.98 |
+| 1500X | MSI      | AM4      | B350    |               291.98 |
+| 1600  | MSI      | AM4      | B350    |               316.98 |
+| 1600X | MSI      | AM4      | B350    |               331.98 |
+| 6100  | ASROCK   | LGA 1151 | Z170    |               289.98 |
+| 6300  | ASROCK   | LGA 1151 | Z170    |               304.98 |
+| 6320  | ASROCK   | LGA 1151 | Z170    |               324.98 |
+| 7100  | ASROCK   | LGA 1151 | Z170    |               299.98 |
+| 7300  | ASROCK   | LGA 1151 | Z170    |               319.98 |
+| 7320  | ASROCK   | LGA 1151 | Z170    |               329.98 |
+| 7350K | ASROCK   | LGA 1151 | Z170    |               339.98 |
+| G3900 | ASROCK   | LGA 1151 | Z170    |               204.98 |
+| G3920 | ASROCK   | LGA 1151 | Z170    |               214.98 |
+| G3930 | ASROCK   | LGA 1151 | Z170    |               209.98 |
+| G3950 | ASROCK   | LGA 1151 | Z170    |               219.98 |
+| G4400 | ASROCK   | LGA 1151 | Z170    |               224.98 |
+| G4500 | ASROCK   | LGA 1151 | Z170    |               234.98 |
+| G4520 | ASROCK   | LGA 1151 | Z170    |               244.98 |
+| G4560 | ASROCK   | LGA 1151 | Z170    |               229.98 |
+| G4600 | ASROCK   | LGA 1151 | Z170    |               239.98 |
+| G4620 | ASROCK   | LGA 1151 | Z170    |               249.98 |
+| 6100  | BIOSTAR  | LGA 1151 | Z270    |               274.98 |
+| 6300  | BIOSTAR  | LGA 1151 | Z270    |               289.98 |
+| 6320  | BIOSTAR  | LGA 1151 | Z270    |               309.98 |
+| 6400  | BIOSTAR  | LGA 1151 | Z270    |               339.98 |
+| 7100  | BIOSTAR  | LGA 1151 | Z270    |               284.98 |
+| 7300  | BIOSTAR  | LGA 1151 | Z270    |               304.98 |
+| 7320  | BIOSTAR  | LGA 1151 | Z270    |               314.98 |
+| 7350K | BIOSTAR  | LGA 1151 | Z270    |               324.98 |
+| 7400  | BIOSTAR  | LGA 1151 | Z270    |               344.98 |
+| G3900 | BIOSTAR  | LGA 1151 | Z270    |               189.98 |
+| G3920 | BIOSTAR  | LGA 1151 | Z270    |               199.98 |
+| G3930 | BIOSTAR  | LGA 1151 | Z270    |               194.98 |
+| G3950 | BIOSTAR  | LGA 1151 | Z270    |               204.98 |
+| G4400 | BIOSTAR  | LGA 1151 | Z270    |               209.98 |
+| G4500 | BIOSTAR  | LGA 1151 | Z270    |               219.98 |
+| G4520 | BIOSTAR  | LGA 1151 | Z270    |               229.98 |
+| G4560 | BIOSTAR  | LGA 1151 | Z270    |               214.98 |
+| G4600 | BIOSTAR  | LGA 1151 | Z270    |               224.98 |
+| G4620 | BIOSTAR  | LGA 1151 | Z270    |               234.98 |
++-------+----------+----------+---------+----------------------+
+
+// find all cpu, motherboard, and videocard combinations that are less than $315 dollars
+
+MariaDB [pcparts]> SELECT DISTINCT c.name, m.brand, m.socket, m.chipset,v.brand,v.gpu, m.price+c.price+v.price FROM cpu c, mobo m, videoCard v WHERE c.socket = m.socket AND m.price+c.price+v.price < 315;
++-------+---------+----------+---------+----------+------------------+-------------------------+
+| name  | brand   | socket   | chipset | brand    | gpu              | m.price+c.price+v.price |
++-------+---------+----------+---------+----------+------------------+-------------------------+
+| 1200  | ASROCK  | AM4      | B350    | ASUS     | GeForce GTX 1050 |                  314.97 |
+| 1200  | ASUS    | AM4      | B350    | EVGA     | GeForce GTX 1050 |                  314.97 |
+| 1200  | ASROCK  | AM4      | B350    | EVGA     | GeForce GTX 1050 |                  299.97 |
+| G3900 | BIOSTAR | LGA 1151 | Z270    | EVGA     | GeForce GTX 1050 |                  304.97 |
+| G3920 | BIOSTAR | LGA 1151 | Z270    | EVGA     | GeForce GTX 1050 |                  314.97 |
+| G3930 | BIOSTAR | LGA 1151 | Z270    | EVGA     | GeForce GTX 1050 |                  309.97 |
+| 1200  | ASROCK  | AM4      | B350    | GIGABYTE | GeForce GTX 1050 |                  304.97 |
+| G3900 | BIOSTAR | LGA 1151 | Z270    | GIGABYTE | GeForce GTX 1050 |                  309.97 |
+| G3930 | BIOSTAR | LGA 1151 | Z270    | GIGABYTE | GeForce GTX 1050 |                  314.97 |
+| 1200  | ASROCK  | AM4      | B350    | MSI      | GeForce GTX 1050 |                  304.97 |
+| G3900 | BIOSTAR | LGA 1151 | Z270    | MSI      | GeForce GTX 1050 |                  309.97 |
+| G3930 | BIOSTAR | LGA 1151 | Z270    | MSI      | GeForce GTX 1050 |                  314.97 |
+| 1200  | ASROCK  | AM4      | B350    | PNY      | GeForce GTX 1050 |                  304.97 |
+| G3900 | BIOSTAR | LGA 1151 | Z270    | PNY      | GeForce GTX 1050 |                  309.97 |
+| G3930 | BIOSTAR | LGA 1151 | Z270    | PNY      | GeForce GTX 1050 |                  314.97 |
+| 1200  | ASUS    | AM4      | B350    | ZOTAC    | GeForce GTX 1050 |                  309.97 |
+| 1200  | ASROCK  | AM4      | B350    | ZOTAC    | GeForce GTX 1050 |                  294.97 |
+| 1300X | ASROCK  | AM4      | B350    | ZOTAC    | GeForce GTX 1050 |                  314.97 |
+| G3900 | ASROCK  | LGA 1151 | Z170    | ZOTAC    | GeForce GTX 1050 |                  314.97 |
+| G3900 | BIOSTAR | LGA 1151 | Z270    | ZOTAC    | GeForce GTX 1050 |                  299.97 |
+| G3920 | BIOSTAR | LGA 1151 | Z270    | ZOTAC    | GeForce GTX 1050 |                  309.97 |
+| G3930 | BIOSTAR | LGA 1151 | Z270    | ZOTAC    | GeForce GTX 1050 |                  304.97 |
+| G3950 | BIOSTAR | LGA 1151 | Z270    | ZOTAC    | GeForce GTX 1050 |                  314.97 |
++-------+---------+----------+---------+----------+------------------+-------------------------+
+
+// Find the cpu that uses the least power, but has the highest clock speed
+
+MariaDB [pcparts]> select name, brand, tdp, speed FROM (select * from cpu c where c.tdp <= (select min(tdp) from cpu))a WHERE a.speed = (select max(speed) from (select * from cpu c where c.tdp <= (select min(tdp) from cpu))d);
++------+-------+------+-------+
+| name | brand | tdp  | speed |
++------+-------+------+-------+
+| 7320 | Intel |   51 |   4.1 |
++------+-------+------+-------+
+1 row in set (0.00 sec)
+
+// find all computers with a cost of 350 or less
+
+MariaDB [pcparts]> SELECT DISTINCT c.series, c.name, v.gpu, c.price+v.price+m.price+r.price+p.price AS cost from cpu c, videoCard v, psu p, ram r, mobo m where c.price+v.price+m.price+r.price+p.price < 350;
++---------+-------+------------------+--------+
+| series  | name  | gpu              | cost   |
++---------+-------+------------------+--------+
+| Celeron | G3900 | GeForce GTX 1050 | 343.95 |
+| Celeron | G3900 | GeForce GTX 1050 | 328.95 |
+| Celeron | G3900 | GeForce GTX 1050 | 348.95 |
+| Celeron | G3900 | GeForce GTX 1050 | 333.95 |
+| Celeron | G3900 | GeForce GTX 1050 | 338.95 |
+| Celeron | G3900 | GeForce GTX 1050 | 323.95 |
+| Celeron | G3900 | GeForce GTX 1050 | 344.95 |
+| Celeron | G3900 | GeForce GTX 1050 | 329.95 |
+| Celeron | G3900 | GeForce GTX 1050 | 349.95 |
+| Celeron | G3900 | GeForce GTX 1050 | 334.95 |
+| Celeron | G3900 | GeForce GTX 1050 | 339.95 |
+| Celeron | G3900 | GeForce GTX 1050 | 324.95 |
+| Celeron | G3900 | GeForce GTX 1050 | 345.95 |
+| Celeron | G3900 | GeForce GTX 1050 | 330.95 |
+| Celeron | G3900 | GeForce GTX 1050 | 335.95 |
+| Celeron | G3900 | GeForce GTX 1050 | 340.95 |
+| Celeron | G3900 | GeForce GTX 1050 | 325.95 |
+| Celeron | G3920 | GeForce GTX 1050 | 338.95 |
+| Celeron | G3920 | GeForce GTX 1050 | 343.95 |
+| Celeron | G3920 | GeForce GTX 1050 | 348.95 |
+| Celeron | G3920 | GeForce GTX 1050 | 333.95 |
+| Celeron | G3920 | GeForce GTX 1050 | 339.95 |
+| Celeron | G3920 | GeForce GTX 1050 | 344.95 |
+| Celeron | G3920 | GeForce GTX 1050 | 349.95 |
+| Celeron | G3920 | GeForce GTX 1050 | 334.95 |
+| Celeron | G3920 | GeForce GTX 1050 | 340.95 |
+| Celeron | G3920 | GeForce GTX 1050 | 345.95 |
+| Celeron | G3920 | GeForce GTX 1050 | 335.95 |
+| Celeron | G3930 | GeForce GTX 1050 | 348.95 |
+| Celeron | G3930 | GeForce GTX 1050 | 333.95 |
+| Celeron | G3930 | GeForce GTX 1050 | 338.95 |
+| Celeron | G3930 | GeForce GTX 1050 | 343.95 |
+| Celeron | G3930 | GeForce GTX 1050 | 328.95 |
+| Celeron | G3930 | GeForce GTX 1050 | 349.95 |
+| Celeron | G3930 | GeForce GTX 1050 | 334.95 |
+| Celeron | G3930 | GeForce GTX 1050 | 339.95 |
+| Celeron | G3930 | GeForce GTX 1050 | 344.95 |
+| Celeron | G3930 | GeForce GTX 1050 | 329.95 |
+| Celeron | G3930 | GeForce GTX 1050 | 335.95 |
+| Celeron | G3930 | GeForce GTX 1050 | 340.95 |
+| Celeron | G3930 | GeForce GTX 1050 | 345.95 |
+| Celeron | G3930 | GeForce GTX 1050 | 330.95 |
+| Celeron | G3950 | GeForce GTX 1050 | 343.95 |
+| Celeron | G3950 | GeForce GTX 1050 | 348.95 |
+| Celeron | G3950 | GeForce GTX 1050 | 338.95 |
+| Celeron | G3950 | GeForce GTX 1050 | 344.95 |
+| Celeron | G3950 | GeForce GTX 1050 | 349.95 |
+| Celeron | G3950 | GeForce GTX 1050 | 339.95 |
+| Celeron | G3950 | GeForce GTX 1050 | 345.95 |
+| Celeron | G3950 | GeForce GTX 1050 | 340.95 |
+| Pentium | G4400 | GeForce GTX 1050 | 348.95 |
+| Pentium | G4400 | GeForce GTX 1050 | 343.95 |
+| Pentium | G4400 | GeForce GTX 1050 | 349.95 |
+| Pentium | G4400 | GeForce GTX 1050 | 344.95 |
+| Pentium | G4400 | GeForce GTX 1050 | 345.95 |
+| Pentium | G4560 | GeForce GTX 1050 | 348.95 |
+| Pentium | G4560 | GeForce GTX 1050 | 349.95 |
++---------+-------+------------------+--------+
+57 rows in set (11.91 sec)
