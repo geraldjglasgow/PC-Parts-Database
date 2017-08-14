@@ -27,6 +27,7 @@ DELIMITER ;
 
 
 
+
 /* USAGE IN TERMINAL AND PHP */
 
 to call this procedure use this in mariaDB:
