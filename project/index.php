@@ -68,7 +68,7 @@
              '.$result[$j][6].' socket<br />
              $'.$result[$j][7].'<br />
              </p>
-             <a href="./moreinfo.php?cname='.$result[$j][0].'">More Info</a>
+             <a href="./parts/cpu/moreinfo.php?cname='.$result[$j][0].'">More Info</a>
              </div>
              </div>
              </div>
@@ -98,7 +98,7 @@
                '.$result[$j][2].' MHz Core Clock<br />
                '.$result[$j][5].'GB Video Memory<br />
                </p>
-               <a href="./moreinfo.php?cname='.$result[$j][4].'">More Info</a>
+               <a href="./parts/gpu/moreinfo.php?cname='.$result[$j][4].'">More Info</a>
                </div>
                </div>
                </div>
