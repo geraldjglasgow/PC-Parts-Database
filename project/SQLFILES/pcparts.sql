@@ -35,12 +35,11 @@ VALUES
   ('ZOTAC','gpu','https://www.zotac.com/'),
   ('G.SKILL','ram','https://www.gskill.com/en/'),
   ('CORSAIR','ram','http://www.corsair.com/en-us'),
-  ('ENERMAX','psu', NULL),
-  ('SILVERSTONE','psu', NULL),
-  ('ROSEWILL', 'psu', NULL),
-  ('TEAM','ram','http://www.teamgroupinc.com/en/index.php');
+  ('ENERMAX','poewer supply','www.enermaxusa.com/'),
+  ('SILVERSTONE','power supply','www.silverstonetek.com/'),
+  ('ROSEWILL','power supply','www.rosewill.com/'),
+  ('TEAM','ram','www.teamgroupinc.com/en/index.php');
 UNLOCK TABLES;
-
 
 CREATE TABLE socketType (
   socket VARCHAR (12),
