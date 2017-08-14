@@ -1,26 +1,25 @@
 
 // find the most expensive pc
 
-MariaDB [pcparts]> SELECT max(c.price + v.price + m.price + r.price + p.price) AS MaxCost FROM cpu c, ram r, videoCard v, psu p, mobo m;
+MariaDB [pcparts]> SELECT max(c.price + v.price + m.price + r.price + p.price) AS MaxCost FROM cpu c, ram r, videoCard v, psu p, mobo m WHERE m.socket = c.socket;
 +---------+
 | MaxCost |
 +---------+
-| 5210.34 |
+| 4910.34 |
 +---------+
 
 // find the least expensive pc
 
-MariaDB [pcparts]> SELECT min(c.price + v.price + m.price + r.price + p.price) AS MaxCost FROM cpu c, ram r, videoCard v, psu p, mobo m;
+MariaDB [pcparts]> SELECT min(c.price + v.price + m.price + r.price + p.price) AS MaxCost FROM cpu c, ram r, videoCard v, psu p, mobo m WHERE c.socket = m.socket;
 +---------+
 | MaxCost |
 +---------+
-|  323.95 |
+|  398.95 |
 +---------+
-1 row in set (11.28 sec)
 
 // find the price per core for all cpus in ascending order
 
-MariaDB [pcparts]> SELECT name, series, brand, price/core as PPC FROM cpu order by PPC;
+MariaDB [pcparts]> SELECT name, series, brand, price/core as PPC FROM cpu order by PPC ASC;
 +-------+--------------+-------+------------+
 | name  | series       | brand | PPC        |
 +-------+--------------+-------+------------+
@@ -194,66 +193,11 @@ MariaDB [pcparts]> select name, brand, tdp, speed FROM (select * from cpu c wher
 
 // find all computers with a cost of 350 or less
 
-MariaDB [pcparts]> SELECT DISTINCT c.series, c.name, v.gpu, c.price+v.price+m.price+r.price+p.price AS cost from cpu c, videoCard v, psu p, ram r, mobo m where c.price+v.price+m.price+r.price+p.price < 350;
-+---------+-------+------------------+--------+
-| series  | name  | gpu              | cost   |
-+---------+-------+------------------+--------+
-| Celeron | G3900 | GeForce GTX 1050 | 343.95 |
-| Celeron | G3900 | GeForce GTX 1050 | 328.95 |
-| Celeron | G3900 | GeForce GTX 1050 | 348.95 |
-| Celeron | G3900 | GeForce GTX 1050 | 333.95 |
-| Celeron | G3900 | GeForce GTX 1050 | 338.95 |
-| Celeron | G3900 | GeForce GTX 1050 | 323.95 |
-| Celeron | G3900 | GeForce GTX 1050 | 344.95 |
-| Celeron | G3900 | GeForce GTX 1050 | 329.95 |
-| Celeron | G3900 | GeForce GTX 1050 | 349.95 |
-| Celeron | G3900 | GeForce GTX 1050 | 334.95 |
-| Celeron | G3900 | GeForce GTX 1050 | 339.95 |
-| Celeron | G3900 | GeForce GTX 1050 | 324.95 |
-| Celeron | G3900 | GeForce GTX 1050 | 345.95 |
-| Celeron | G3900 | GeForce GTX 1050 | 330.95 |
-| Celeron | G3900 | GeForce GTX 1050 | 335.95 |
-| Celeron | G3900 | GeForce GTX 1050 | 340.95 |
-| Celeron | G3900 | GeForce GTX 1050 | 325.95 |
-| Celeron | G3920 | GeForce GTX 1050 | 338.95 |
-| Celeron | G3920 | GeForce GTX 1050 | 343.95 |
-| Celeron | G3920 | GeForce GTX 1050 | 348.95 |
-| Celeron | G3920 | GeForce GTX 1050 | 333.95 |
-| Celeron | G3920 | GeForce GTX 1050 | 339.95 |
-| Celeron | G3920 | GeForce GTX 1050 | 344.95 |
-| Celeron | G3920 | GeForce GTX 1050 | 349.95 |
-| Celeron | G3920 | GeForce GTX 1050 | 334.95 |
-| Celeron | G3920 | GeForce GTX 1050 | 340.95 |
-| Celeron | G3920 | GeForce GTX 1050 | 345.95 |
-| Celeron | G3920 | GeForce GTX 1050 | 335.95 |
-| Celeron | G3930 | GeForce GTX 1050 | 348.95 |
-| Celeron | G3930 | GeForce GTX 1050 | 333.95 |
-| Celeron | G3930 | GeForce GTX 1050 | 338.95 |
-| Celeron | G3930 | GeForce GTX 1050 | 343.95 |
-| Celeron | G3930 | GeForce GTX 1050 | 328.95 |
-| Celeron | G3930 | GeForce GTX 1050 | 349.95 |
-| Celeron | G3930 | GeForce GTX 1050 | 334.95 |
-| Celeron | G3930 | GeForce GTX 1050 | 339.95 |
-| Celeron | G3930 | GeForce GTX 1050 | 344.95 |
-| Celeron | G3930 | GeForce GTX 1050 | 329.95 |
-| Celeron | G3930 | GeForce GTX 1050 | 335.95 |
-| Celeron | G3930 | GeForce GTX 1050 | 340.95 |
-| Celeron | G3930 | GeForce GTX 1050 | 345.95 |
-| Celeron | G3930 | GeForce GTX 1050 | 330.95 |
-| Celeron | G3950 | GeForce GTX 1050 | 343.95 |
-| Celeron | G3950 | GeForce GTX 1050 | 348.95 |
-| Celeron | G3950 | GeForce GTX 1050 | 338.95 |
-| Celeron | G3950 | GeForce GTX 1050 | 344.95 |
-| Celeron | G3950 | GeForce GTX 1050 | 349.95 |
-| Celeron | G3950 | GeForce GTX 1050 | 339.95 |
-| Celeron | G3950 | GeForce GTX 1050 | 345.95 |
-| Celeron | G3950 | GeForce GTX 1050 | 340.95 |
-| Pentium | G4400 | GeForce GTX 1050 | 348.95 |
-| Pentium | G4400 | GeForce GTX 1050 | 343.95 |
-| Pentium | G4400 | GeForce GTX 1050 | 349.95 |
-| Pentium | G4400 | GeForce GTX 1050 | 344.95 |
-| Pentium | G4400 | GeForce GTX 1050 | 345.95 |
-| Pentium | G4560 | GeForce GTX 1050 | 348.95 |
-| Pentium | G4560 | GeForce GTX 1050 | 349.95 |
-+---------+-------+------------------+--------+
-57 rows in set (11.91 sec)
+MariaDB [pcparts]> SELECT DISTINCT c.series, c.name, v.gpu, c.price+v.price+m.price+r.price+p.price AS cost from cpu c, videoCard v, psu p, ram r, mobo m where c.price+v.price+m.price+r.price+p.price < 400 AND m.socket = c.socket;
++---------+------+------------------+--------+
+| series  | name | gpu              | cost   |
++---------+------+------------------+--------+
+| Ryzen 3 | 1200 | GeForce GTX 1050 | 398.95 |
+| Ryzen 3 | 1200 | GeForce GTX 1050 | 399.95 |
++---------+------+------------------+--------+
+2 rows in set (2.99 sec)
