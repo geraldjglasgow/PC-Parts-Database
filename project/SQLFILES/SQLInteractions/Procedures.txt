@@ -10,6 +10,25 @@ COMMIT;
 END $$
 DELIMITER ;
 
+/* all brands specified are some $ off */
+
+DELIMITER $$
+CREATE PROCEDURE brand(money INT, card VARCHAR(15))
+BEGIN
+START TRANSACTION;
+UPDATE videoCard SET price = price - money WHERE brand = card;
+UPDATE psu SET price = price - money WHERE brand = card;
+UPDATE cpu SET price = price - money WHERE brand = card;
+UPDATE mobo SET price = price - money WHERE brand = card;
+UPDATE ram SET price = price - money WHERE brand = card;
+COMMIT;
+END $$
+DELIMITER ;
+
+
+
+/* USAGE IN TERMINAL AND PHP */
+
 to call this procedure use this in mariaDB:
 CALL bsale();
 
