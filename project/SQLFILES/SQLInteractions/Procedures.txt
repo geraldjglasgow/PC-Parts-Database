@@ -1,10 +1,19 @@
+/* procedure to put all AMD cpus on sale for 20% off */
+
 DELIMITER $$
-CREATE  PROCEDURE sale()
+CREATE  PROCEDURE bsale()
 BEGIN
 START TRANSACTION;
-UPDATE cpu SET price = 100 WHERE brand = 'AMD';
+UPDATE cpu SET price = price*.8 WHERE brand = 'AMD';
+UPDATE mobo SET price = price*.8 WHERE type = 'AMD';
 COMMIT;
 END $$
-DELIMITER;
+DELIMITER ;
 
-CALL sale();
+to call this procedure use this in mariaDB:
+CALL bsale();
+
+use this in PHP:
+$q=$cn->exec('call avg_sal(@out)'); // where $cn is the db connection through PDO
+$res=$cn->query('select @out')->fetchAll();
+print_r($res); // to print results
