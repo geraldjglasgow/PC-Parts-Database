@@ -102,23 +102,27 @@ th, td {
                                   </tr>
                                   <tr>
                                     <th>Socket</th>
-                                    <td>'.$result[0][3].' GB</td>
+                                    <td>'.$result[0][3].'</td>
                                   </tr>
                                   <tr>
                                     <th>Chipset</th>
-                                    <td>'.$result[0][4].' MHz</td>
+                                    <td>'.$result[0][4].'</td>
                                   </tr>
                                   <tr>
                                     <th>Memory Type</th>
-                                    <td>'.$result[0][5].'</td>
-                                  </tr>
-                                  <tr>
-                                    <th>USB Ports</th>
                                     <td>'.$result[0][6].'</td>
                                   </tr>
                                   <tr>
-                                    <th>PCIE Slots</th>
+                                    <th>Max Memory</th>
+                                    <td>'.$result[0][5].' GB</td>
+                                  </tr>
+                                  <tr>
+                                    <th>USB Ports</th>
                                     <td>'.$result[0][7].'</td>
+                                  </tr>
+                                  <tr>
+                                    <th>PCIE Slots</th>
+                                    <td>'.$result[0][8].'</td>
                                   </tr>
                                 </table>
                               </p>

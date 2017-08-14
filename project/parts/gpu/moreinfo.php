@@ -102,7 +102,7 @@ th, td {
                                   </tr>
                                   <tr>
                                     <th>Core Clock</th>
-                                    <td>'.$result[0][2].'</td>
+                                    <td>'.$result[0][2].' MHz</td>
                                   </tr>
                                   <tr>
                                     <th>Memory Type</th>
@@ -110,11 +110,11 @@ th, td {
                                   </tr>
                                   <tr>
                                     <th>Memory</th>
-                                    <td>'.$result[0][5].'</td>
+                                    <td>'.$result[0][5].'GB</td>
                                   </tr>
                                   <tr>
                                     <th>Memory Interface</th>
-                                    <td>'.$result[0][6].' GHz</td>
+                                    <td>'.$result[0][6].' bit</td>
                                   </tr>
                                 </table>
                               </p>
